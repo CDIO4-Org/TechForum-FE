@@ -1,0 +1,29 @@
+.banner-right {
+    float: right;
+    width: 50%;
+    height: 100vh;
+}
+
+.banner-right img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.wrap-banner{
+    width: 100%;
+    height: 30%;
+    display: flex;
+}
+
+.banner1, .banner2 {
+    width: 50%;
+    height: 100%;
+}
+
+.slick-slider div img,
+.slick-slider2 div img {
+    width: 100%;   
+    object-fit: cover;
+    height: 293px;
+}

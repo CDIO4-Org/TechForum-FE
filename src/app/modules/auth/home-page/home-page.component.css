@@ -1,0 +1,149 @@
+.navigation {
+    width: 100%;
+    height: 84px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    background-color: white;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.wrap-content-nav {
+    width: 1400px;
+    height: 84px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto auto;
+}
+
+.wrap-icon-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 170px;
+    height: 100%;
+}
+
+.wrap-icon-text div h2 {
+    color: #F48023;
+    margin: 0;
+}
+
+
+.btn-login {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #EAEAEA;
+    color: #1682FD;
+    margin-left: 10px;
+}
+
+
+.btn-signup {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #F48023;
+    color: white;
+    position: relative;
+    display: inline-block;
+}
+
+.btn-signup.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.loading-text {
+    display: none;
+}
+
+.btn-signup.loading .loading-text {
+    display: inline-block;
+}
+
+.btn-signup.loading .original-text {
+    display: none;
+}
+
+
+.Sidebar {
+    width: 22%;
+    height: 100vh;
+    border-right: 1px solid #EAEAEA;
+    float: left;
+    position: fixed;
+    background-color: white;
+    left: 0;
+    top: 84px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.col_item {
+    width: 100%;
+    height: 50px;
+    padding: 10px 40px;
+    border-bottom: 1px solid #EAEAEA;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid white;
+}
+
+.col_i {
+    width: 30px;
+}
+
+.col_item:hover {
+    background-color: #F7F7F7;
+    cursor: pointer;
+    border-left: 4px solid #F48023;
+}
+
+.col_item:hover i,
+.col_item:hover a {
+    color: #F48023;
+}
+
+.fa-angle-down {
+    transform: rotate(180deg);
+}
+
+/* .col_item:hover .fa-angle-down {
+    transform: rotate(180deg);
+} */
+.rotate {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+  }
+
+.Post {
+    width: 100%;
+    height: 10000px;
+    background-color: rgb(250, 250, 250);
+}
+
+.wrap-post {
+    width: 1000px;
+    padding: 20px;
+    height: auto;
+    margin: 84px 100px 100px 500px;
+}
+
+.main-post {
+    width: 960px;
+    height: auto;
+    background-color: white;
+    border-color: #EAEAEA;
+    border-radius: 5px;
+    box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}

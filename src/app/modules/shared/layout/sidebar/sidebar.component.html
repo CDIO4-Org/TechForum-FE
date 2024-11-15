@@ -1,0 +1,46 @@
+<div class="Sidebar">
+    <div class="content-menu">
+        <div style="margin: 30px 0; padding-left: 90px">
+            <form>
+                <button type="submit" style="border: none;background-color: white;color: black;font-size: 15px"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <input class="ip-text" type="text" name="" id="" placeholder="Tìm kiếm...">
+            </form>
+        </div>
+        <div class="">
+            <h4 style="padding: 15px 0 15px 90px;border-top: 1px solid #EAEAEA"><strong>MENU</strong></h4>
+            <div class="item-menu">
+                <div class="menu-task">
+                    <i class="fa-solid fa-house" style="margin-right: 10px"></i>
+                    <a th:href="@{/showListBlog}"><strong>Trang Chủ</strong></a>
+                </div>
+
+
+                <div class="menu-task" onclick="toggleDropdown('dropdown-1')">
+                    <i class="fa-solid fa-tag" style="margin-right: 10px"></i>
+                    <p><strong>Chủ Đề</strong></p>
+                </div>
+                <div id="dropdown-1" class="dropdown-content" >
+                    <div th:each="c,loop: ${categoryList}">
+                        <a th:href="@{{id}/searchByCategory(id=${c.id})}" th:text="${c.getName()}" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="icon-contact">
+        <a href="">
+            <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="">
+            <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="">
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    </div>
+</div>

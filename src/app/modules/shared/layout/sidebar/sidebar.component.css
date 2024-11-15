@@ -1,0 +1,64 @@
+.Sidebar {
+    z-index: 100;
+    position: fixed;
+    top: 84px;
+    width: 350px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-right: 1px solid #EAEAEA;
+}
+
+.ip-text {
+    padding: 5px 5px;
+}
+
+.ip-text:focus {
+    outline: none;
+}
+
+.menu-task {
+    border-top: 1px solid #EAEAEA;
+    border-left: 4px solid white;
+    padding: 15px 0 15px 90px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-task:hover {
+    background-color: #FCF4EC;
+    border-left: 4px solid #F48023;
+    color: #F48023;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+}
+
+.dropdown-content div a {
+    border-top: 1px solid #EAEAEA;
+    border-left: 4px solid white;
+    padding: 15px 0 15px 115px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-content div a:hover {
+    background-color: #FCF4EC;
+    border-left: 4px solid #F48023;
+    color: #F48023;
+    cursor: pointer;
+}
+
+.icon-contact {
+    font-size: 25px;
+    padding-left: 80px;
+    margin-bottom: 100px;
+}
+
+.icon-contact a i {
+    padding: 7px;
+}

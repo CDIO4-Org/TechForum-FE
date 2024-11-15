@@ -1,0 +1,107 @@
+<div class="navigation">
+    <div class="wrap-content-nav">
+        <div class="wrap-icon-text">
+            <div>
+                <img src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
+                    alt="" width="25" height="29">
+            </div>
+            <div>
+                <h2><strong>BDHNP</strong></h2>
+            </div>
+        </div>
+        <div class="wrap-btn">
+            <strong>
+                <a routerLink="/auth/registration"><button class="btn-signup"><strong style="font-weight: bold"><i
+                                class="fa-solid fa-user-plus"></i> ĐĂNG KÝ</strong></button></a>
+            </strong>
+
+            <a routerLink="/auth/login"><button class="btn-login"><strong style="font-weight: bold"> ĐĂNG
+                        NHẬP</strong></button></a>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="Sidebar">
+    <div class="col">
+        <div class="col_item">
+            <h4><strong>MENU</strong></h4>
+        </div>
+
+        <div class="col_item">
+            <div>
+                <i class="fa-solid fa-house col_i"></i>
+                <a routerLink="">Trang Chủ</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+        </div>
+
+        <div class="col_item" (click)="toggleDropdown()">
+            <div>
+                <i class="fa-solid fa-tag col_i"></i>
+                <a routerLink="">Chủ Đề</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-angle-down" [ngClass]="{'rotate': isDropdownVisible}"></i>
+            </div>
+        </div>
+        <div class="dropdown-content" *ngIf="!isDropdownVisible">
+            <div class="col_item">
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    1
+                </a>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+            <div class="col_item">
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    2
+                </a>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+            <div class="col_item">
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    3
+                </a>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Post">
+    <div class="wrap-post">
+        <div>
+            <form action="">
+                <div>
+                    <span></span>
+                    <input type="text " placeholder="Tìm kiếm bài viết ở đây...">
+                </div>
+                <button type="submit">Tìm kiếm</button>
+            </form>
+
+        </div>
+
+        <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="main-post ">
+
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<!-- Modal Post blog-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <b>
+                    <h4 style="text-align: center">CẦN ĐĂNG NHẬP ĐỂ THỰC HIỆN</h4>
+                </b>
+            </div>
+        </div>
+    </div>
+</div>

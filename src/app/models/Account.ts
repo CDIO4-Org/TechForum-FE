@@ -3,5 +3,4 @@ export interface Account{
     accountName?: string;
     passsword?: string;
     status?: boolean;
-    
 }

@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
+  spinner: boolean = true
 
   constructor() { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.spinner = false
+    }, 750)
   }
 
 }

@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { AuthRoutingModule } from '../../auth/auth-routing.module';
 import { LoadingComponent } from './loading/loading.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 
@@ -15,6 +16,7 @@ import { LoadingComponent } from './loading/loading.component';
     HeaderComponent,
     FooterComponent,
     LoadingComponent,
+    NavigationComponent,
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { LoadingComponent } from './loading/loading.component';
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    LoadingComponent
+    LoadingComponent,
+    NavigationComponent
   ]
 })
 export class LayoutModule { }

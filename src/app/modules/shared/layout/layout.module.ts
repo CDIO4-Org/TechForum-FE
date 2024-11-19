@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from '../../auth/auth-routing.module';
 import { LoadingComponent } from './loading/loading.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -21,7 +21,8 @@ import { NavigationComponent } from './navigation/navigation.component';
   imports: [
     CommonModule,
     FormsModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,

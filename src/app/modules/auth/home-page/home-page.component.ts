@@ -11,17 +11,24 @@ export class HomePageComponent implements OnInit {
 
   isDropdownVisible = true;
 
-  
+  blogList: Blogs[] = []
+
+
   constructor(
     private blogService: BlogService
   ) { }
 
   ngOnInit(): void {
+    this.GetAll()
   }
 
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
 
-
+  GetAll() {
+    this.blogService.getAllBlog().subscribe((data: any) => {
+      this.blogList = data
+    })
+  }
 }

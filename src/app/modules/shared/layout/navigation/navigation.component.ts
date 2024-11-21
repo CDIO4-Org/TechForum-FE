@@ -10,6 +10,7 @@ import { Categories } from 'src/app/models/Categories';
 import { finalize } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { ImageDto } from 'src/app/models/dto/ImageDto';
+import { Blogs } from 'src/app/models/Blogs';
 
 @Component({
   selector: 'app-navigation',
@@ -22,6 +23,34 @@ export class NavigationComponent implements OnInit {
   today: any = Date.now();
   selectedImage: any = null;
   defaultImageUrl = 'Null';
+
+  userFake = {
+    "id": 3,
+    "avatar": "https://example.com/avatar1.png",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "gender": 1,
+    "phoneNumber": "1234567890",
+    "birthDate": "1990-01-01",
+    "address": "123 Main Street",
+    "account": {
+      "id": 1,
+      "accountName": "john_doe",
+      "password": "hashed_password1",
+      "status": true,
+      "roles": [
+        {
+          "id": 2,
+          "roleName": "USER"
+        },
+        {
+          "id": 1,
+          "roleName": "ADMIN"
+        }
+      ]
+    }
+  }
 
 
 
@@ -45,8 +74,8 @@ export class NavigationComponent implements OnInit {
       beginDate: new FormControl(''),
       content: new FormControl(''),
       status: new FormControl(''),
-      user_id: new FormControl('3'),
-      category_id: new FormControl(''),
+      user: new FormControl(this.userFake),
+      category: new FormControl(''),
     })
   }
 
@@ -73,17 +102,21 @@ export class NavigationComponent implements OnInit {
     } else {
       this.callApiAndSaveUrl(this.defaultImageUrl);
     }
-
+  
     if (this.blogForm.invalid) {
       return;
     }
-
+  
     const formData = this.blogForm.value;
-    console.log(formData);
-    this.blogService.createBlog(formData).subscribe(next => {
-      console.log(next);
-    });
-
+    this.blogService.createBlog(formData).subscribe(
+      (data: Blogs) => {
+        this.toastr.show('Đăng bài thành công!');
+  
+      },
+      (error) => {
+        this.toastr.show('Đã xảy ra lỗi khi đăng bài!');
+      }
+    );
   }
 
   callApiAndSaveUrl(url: string) {
@@ -92,6 +125,7 @@ export class NavigationComponent implements OnInit {
       blog_id: null,
     };
     this.imgService.CreateImg(blogImg).subscribe(() => {
+
     });
   }
 

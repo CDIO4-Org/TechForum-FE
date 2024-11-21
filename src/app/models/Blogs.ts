@@ -7,6 +7,6 @@ export interface Blogs{
     beginDate?: string;
     content?: string;
     status?: number;
-    user_id?: Users;
-    category_id?: Categories;
+    user?: Users;
+    category?: Categories;
 }

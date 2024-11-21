@@ -34,8 +34,8 @@
                 <form [formGroup]="blogForm" (ngSubmit)="create()">
 
                     <div class="mb-3">
-                        <label for="inputCate" class="form-label">Chủ đề:</label>
-                        <select class="form-select" name="" id="category_id" formControlName="category_id">
+                        <label for="category_id" class="form-label">Chủ đề:</label>
+                        <select class="form-select" name="" id="category_id" formControlName="category">
                             <option value="" selected disabled>Chọn</option>
                             <option *ngFor="let items of cateList" [ngValue]="items" >{{items.name}}</option>
                           </select>

@@ -12,6 +12,7 @@ import { BlogApproveComponent } from './admin/blog-approve/blog-approve.componen
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { BlogPostedComponent } from './user/blog-posted/blog-posted.component';
 import { LayoutModule } from '../../shared/layout/layout.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -31,7 +32,9 @@ import { LayoutModule } from '../../shared/layout/layout.module';
   imports: [
     CommonModule,
     ComponentsRoutingModule,
-    LayoutModule
+    LayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ComponentsModule { }

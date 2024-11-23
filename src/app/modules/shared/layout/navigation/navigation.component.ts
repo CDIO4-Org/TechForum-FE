@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +12,7 @@ import { formatDate } from '@angular/common';
 import { ImageDto } from 'src/app/models/dto/ImageDto';
 import { Blogs } from 'src/app/models/Blogs';
 
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -23,6 +24,10 @@ export class NavigationComponent implements OnInit {
   today: any = Date.now();
   selectedImage: any = null;
   defaultImageUrl = 'Null';
+
+  @ViewChild('exampleModal', { static: false }) exampleModal: any;
+
+
 
   userFake = {
     "id": 3,
@@ -102,21 +107,14 @@ export class NavigationComponent implements OnInit {
     } else {
       this.callApiAndSaveUrl(this.defaultImageUrl);
     }
-  
+
     if (this.blogForm.invalid) {
       return;
     }
-  
+
     const formData = this.blogForm.value;
-    this.blogService.createBlog(formData).subscribe(
-      (data: Blogs) => {
-        this.toastr.show('Đăng bài thành công!');
-  
-      },
-      (error) => {
-        this.toastr.show('Đã xảy ra lỗi khi đăng bài!');
-      }
-    );
+    this.blogService.createBlog(formData).subscribe((data: Blogs) => {
+    },);
   }
 
   callApiAndSaveUrl(url: string) {
@@ -125,7 +123,6 @@ export class NavigationComponent implements OnInit {
       blog_id: null,
     };
     this.imgService.CreateImg(blogImg).subscribe(() => {
-
     });
   }
 

@@ -1,46 +1,71 @@
 <div class="Sidebar">
-    <div class="content-menu">
-        <div style="margin: 30px 0; padding-left: 90px">
-            <form>
-                <button type="submit" style="border: none;background-color: white;color: black;font-size: 15px"><i
-                        class="fa-solid fa-magnifying-glass"></i></button>
-                <input class="ip-text" type="text" name="" id="" placeholder="Tìm kiếm...">
-            </form>
+    <div class="col">
+        <div class="col_item">
+            <h4><strong>MENU</strong></h4>
         </div>
-        <div class="">
-            <h4 style="padding: 15px 0 15px 90px;border-top: 1px solid #EAEAEA"><strong>MENU</strong></h4>
-            <div class="item-menu">
-                <div class="menu-task">
-                    <i class="fa-solid fa-house" style="margin-right: 10px"></i>
-                    <a th:href="@{/showListBlog}"><strong>Trang Chủ</strong></a>
-                </div>
 
-
-                <div class="menu-task" onclick="toggleDropdown('dropdown-1')">
-                    <i class="fa-solid fa-tag" style="margin-right: 10px"></i>
-                    <p><strong>Chủ Đề</strong></p>
-                </div>
-                <div id="dropdown-1" class="dropdown-content" >
-                    <div th:each="c,loop: ${categoryList}">
-                        <a th:href="@{{id}/searchByCategory(id=${c.id})}" th:text="${c.getName()}" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
-                    </div>
-                </div>
+        <div class="col_item">
+            <div>
+                <i class="fa-solid fa-house col_i"></i>
+                <a routerLink="">Trang Chủ</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-angle-right"></i>
             </div>
         </div>
-    </div>
 
-    <div class="icon-contact">
-        <a href="">
-            <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="">
-            <i class="fa-brands fa-facebook"></i>
-        </a>
-        <a href="">
-            <i class="fa-brands fa-tiktok"></i>
-        </a>
-        <a href="">
-            <i class="fa-solid fa-envelope"></i>
-        </a>
+        <div class="col_item" (click)="toggleDropdown()">
+            <div>
+                <i class="fa-solid fa-tag col_i"></i>
+                <a routerLink="">Chủ Đề</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-angle-down" [ngClass]="{'rotate': isDropdownVisible}"></i>
+            </div>
+        </div>
+        <div class="dropdown-content" *ngIf="!isDropdownVisible">
+            <div class="col_item" *ngFor="let item of cateList">
+                <a routerLink="">
+                    {{item.name}}
+                </a>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+        </div>
+
+        <div class="col_item" (click)="toggleDropdown2()">
+            <div>
+                <i class="fa-solid fa-file-signature col_i"></i>
+                <a>Chức Năng Cá Nhân</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-angle-down" [ngClass]="{'rotate': isDropdownVisible2}"></i>
+            </div>
+        </div>
+        <div class="dropdown-content" *ngIf="!isDropdownVisible2">
+            <div class="col_item">
+                <a routerLink="/pages/components/blog-liked">Bài Viết Đã Thích</a>
+            </div>
+            <div class="col_item">
+                <a routerLink="/pages/components/blog-bookmarked">Bài Viết Đã Đánh Dấu</a>
+            </div>
+        </div>
+
+        <div class="col_item" (click)="toggleDropdown3()">
+            <div>
+                <i class="fa-solid fa-user-tie col_i"></i>
+                <a>Chức Năng Admin</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-angle-down" [ngClass]="{'rotate': isDropdownVisible3}"></i>
+            </div>
+        </div>
+        <div class="dropdown-content" *ngIf="!isDropdownVisible3">
+            <div class="col_item">
+                <a routerLink="/pages/components/user-list">Danh Sách Người Dùng</a>
+            </div>
+            <div class="col_item">
+                <a routerLink="/pages/components/blog-approve">Duyệt Bài Viết </a>
+            </div>
+        </div>
     </div>
 </div>

@@ -14,7 +14,7 @@ export class BlogService {
   ) { }
 
   getAllBlog(): Observable<Blogs[]> {
-    return this.http.get<Blogs[]>(this.API_BLOG + 'getAllBlog')
+    return this.http.get<Blogs[]>(this.API_BLOG + 'activedBlogs')
   }
 
   createBlog(blog: Blogs): Observable<Blogs> {
@@ -22,8 +22,14 @@ export class BlogService {
   }
 
   findById(id: number): Observable<Blogs> {
-    return this.http.get<Blogs>(`${this.API_BLOG + 'getByid'}/${id}`);
+    return this.http.get<Blogs>(this.API_BLOG + 'getByid/' +id);
   }
 
-  
+
+  findByTitle(title: String): Observable<Blogs[]> {
+    return this.http.get<Blogs[]>(this.API_BLOG + 'findByTitle' + '?title=' + title)
+
+  }
+
+
 }

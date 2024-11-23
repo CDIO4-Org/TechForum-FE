@@ -49,21 +49,9 @@
             </div>
         </div>
         <div class="dropdown-content" *ngIf="!isDropdownVisible">
-            <div class="col_item">
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    1
-                </a>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-            <div class="col_item">
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    2
-                </a>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-            <div class="col_item">
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    3
+            <div class="col_item" *ngFor="let item of cateList">
+                <a routerLink="">
+                    {{item.name}}
                 </a>
                 <i class="fa-solid fa-angle-right"></i>
             </div>

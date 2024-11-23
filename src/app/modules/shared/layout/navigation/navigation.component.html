@@ -70,7 +70,7 @@
     function previewImages(event) {
         const files = event.target.files;
         const previewContainer = document.getElementById('imagePreview');
-        previewContainer.innerHTML = ''; // Clear previous previews
+        previewContainer.innerHTML = ''; 
 
         Array.from(files).forEach(file => {
             const reader = new FileReader();

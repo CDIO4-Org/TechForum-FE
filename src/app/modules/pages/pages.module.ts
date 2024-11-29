@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { LayoutModule } from '../shared/layout/layout.module';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -11,7 +13,10 @@ import { LayoutModule } from '../shared/layout/layout.module';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    LayoutModule
+    LayoutModule,
+    FormsModule,
+    ToastrModule.forRoot(),
+
   ],
   exports: [
 

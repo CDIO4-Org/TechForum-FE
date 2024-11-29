@@ -30,38 +30,20 @@
     margin: 0;
 }
 
-
-.btn-login {
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #EAEAEA;
-    color: #1682FD;
-    margin-left: 10px;
-}
-
-
-.btn-signup {
+.wrap-btn button {
     padding: 10px 20px;
     border-radius: 5px;
     background-color: #F48023;
     color: white;
-    position: relative;
-    display: inline-block;
 }
 
-.btn-signup.loading {
-    pointer-events: none;
-    opacity: 0.6;
+.btnPost {
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    background-color: #F48023 !important;
+    color: white !important;
 }
 
-.loading-text {
-    display: none;
-}
-
-.btn-signup.loading .loading-text {
-    display: inline-block;
-}
-
-.btn-signup.loading .original-text {
-    display: none;
-}
+.modal-backdrop {
+    display: none !important;
+  }

@@ -4,6 +4,7 @@ import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { AuthFooterComponent } from './auth-footer/auth-footer.component';
 import { AuthRightComponent } from './auth-right/auth-right.component';
 import { AuthRoutingModule } from '../../auth/auth-routing.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -16,6 +17,7 @@ import { AuthRoutingModule } from '../../auth/auth-routing.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
+    ToastrModule.forRoot(),
   ],
   exports: [
     AuthHeaderComponent,

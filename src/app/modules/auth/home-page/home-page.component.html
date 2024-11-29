@@ -49,21 +49,9 @@
             </div>
         </div>
         <div class="dropdown-content" *ngIf="!isDropdownVisible">
-            <div class="col_item">
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    1
-                </a>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-            <div class="col_item">
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    2
-                </a>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-            <div class="col_item">
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    3
+            <div class="col_item" *ngFor="let item of cateList">
+                <a routerLink="">
+                    {{item.name}}
                 </a>
                 <i class="fa-solid fa-angle-right"></i>
             </div>
@@ -83,10 +71,12 @@
             </form>
         </div>
 
+
         <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="main-post ">
+            <div class="main-post" *ngFor="let item of blogList">
+                
                 <div class="wrap_main-title">
-                    <h4 style="color: #F48023;">How to create admin dashboard for Finance Application?</h4>
+                    <h4 style="color: #F48023;">{{item.title}}</h4>
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
                 <div class="wrap_author">
@@ -107,13 +97,7 @@
                 <div
                     style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
                     <p style="color: grey; line-height: 25px;">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto illum accusantium repellendus
-                        ducimus quibusdam veritatis eos, corrupti asperiores, itaque vitae a, expedita officia
-                        recusandae
-                        totam rem amet provident ab. Dolor. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Nam
-                        tempora illum aut quibusdam consequuntur, minus mollitia necessitatibus id reiciendis deleniti?
-                        Distinctio vitae vero quis, necessitatibus aliquam ab explicabo unde eaque?
+                        {{item.content}}
                     </p>
                 </div>
                 <div>
@@ -142,300 +126,6 @@
             </div>
         </a>
 
-        <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="main-post ">
-                <div class="wrap_main-title">
-                    <h4 style="color: #F48023;">How to create admin dashboard for Finance Application?</h4>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-                <div class="wrap_author">
-                    <div style="padding-right: 20px;">
-                        <img width="30" height="30"
-                            src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
-                            alt="">
-                    </div>
-                    <div>
-                        <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
-                        <div class="d-flex align-items-center">
-                            <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">Trung Bao</p>
-                            <p style="color: grey;">1hour</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div
-                    style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
-                    <p style="color: grey; line-height: 25px;">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto illum accusantium repellendus
-                        ducimus quibusdam veritatis eos, corrupti asperiores, itaque vitae a, expedita officia
-                        recusandae
-                        totam rem amet provident ab. Dolor. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Nam
-                        tempora illum aut quibusdam consequuntur, minus mollitia necessitatibus id reiciendis deleniti?
-                        Distinctio vitae vero quis, necessitatibus aliquam ab explicabo unde eaque?
-                    </p>
-                </div>
-                <div>
-                    <div class="wrap-item-post d-flex justify-content-between align-items-center">
-                        <div class="">
-                            <div>
-                                <p class="st_cate">Cong Nghe</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center" style="width: 300px">
-                            <div class="icon-number">
-                                <i class="fa-regular fa-heart"></i>
-                                <p>312</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-eye"></i>
-                                <p>321</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-message"></i>
-                                <p>312</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="main-post ">
-                <div class="wrap_main-title">
-                    <h4 style="color: #F48023;">How to create admin dashboard for Finance Application?</h4>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-                <div class="wrap_author">
-                    <div style="padding-right: 20px;">
-                        <img width="30" height="30"
-                            src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
-                            alt="">
-                    </div>
-                    <div>
-                        <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
-                        <div class="d-flex align-items-center">
-                            <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">Trung Bao</p>
-                            <p style="color: grey;">1hour</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div
-                    style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
-                    <p style="color: grey; line-height: 25px;">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto illum accusantium repellendus
-                        ducimus quibusdam veritatis eos, corrupti asperiores, itaque vitae a, expedita officia
-                        recusandae
-                        totam rem amet provident ab. Dolor. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Nam
-                        tempora illum aut quibusdam consequuntur, minus mollitia necessitatibus id reiciendis deleniti?
-                        Distinctio vitae vero quis, necessitatibus aliquam ab explicabo unde eaque?
-                    </p>
-                </div>
-                <div>
-                    <div class="wrap-item-post d-flex justify-content-between align-items-center">
-                        <div class="">
-                            <div>
-                                <p class="st_cate">Cong Nghe</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center" style="width: 300px">
-                            <div class="icon-number">
-                                <i class="fa-regular fa-heart"></i>
-                                <p>312</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-eye"></i>
-                                <p>321</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-message"></i>
-                                <p>312</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="main-post ">
-                <div class="wrap_main-title">
-                    <h4 style="color: #F48023;">How to create admin dashboard for Finance Application?</h4>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-                <div class="wrap_author">
-                    <div style="padding-right: 20px;">
-                        <img width="30" height="30"
-                            src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
-                            alt="">
-                    </div>
-                    <div>
-                        <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
-                        <div class="d-flex align-items-center">
-                            <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">Trung Bao</p>
-                            <p style="color: grey;">1hour</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div
-                    style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
-                    <p style="color: grey; line-height: 25px;">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto illum accusantium repellendus
-                        ducimus quibusdam veritatis eos, corrupti asperiores, itaque vitae a, expedita officia
-                        recusandae
-                        totam rem amet provident ab. Dolor. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Nam
-                        tempora illum aut quibusdam consequuntur, minus mollitia necessitatibus id reiciendis deleniti?
-                        Distinctio vitae vero quis, necessitatibus aliquam ab explicabo unde eaque?
-                    </p>
-                </div>
-                <div>
-                    <div class="wrap-item-post d-flex justify-content-between align-items-center">
-                        <div class="">
-                            <div>
-                                <p class="st_cate">Cong Nghe</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center" style="width: 300px">
-                            <div class="icon-number">
-                                <i class="fa-regular fa-heart"></i>
-                                <p>312</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-eye"></i>
-                                <p>321</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-message"></i>
-                                <p>312</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="main-post ">
-                <div class="wrap_main-title">
-                    <h4 style="color: #F48023;">How to create admin dashboard for Finance Application?</h4>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-                <div class="wrap_author">
-                    <div style="padding-right: 20px;">
-                        <img width="30" height="30"
-                            src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
-                            alt="">
-                    </div>
-                    <div>
-                        <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
-                        <div class="d-flex align-items-center">
-                            <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">Trung Bao</p>
-                            <p style="color: grey;">1hour</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div
-                    style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
-                    <p style="color: grey; line-height: 25px;">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto illum accusantium repellendus
-                        ducimus quibusdam veritatis eos, corrupti asperiores, itaque vitae a, expedita officia
-                        recusandae
-                        totam rem amet provident ab. Dolor. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Nam
-                        tempora illum aut quibusdam consequuntur, minus mollitia necessitatibus id reiciendis deleniti?
-                        Distinctio vitae vero quis, necessitatibus aliquam ab explicabo unde eaque?
-                    </p>
-                </div>
-                <div>
-                    <div class="wrap-item-post d-flex justify-content-between align-items-center">
-                        <div class="">
-                            <div>
-                                <p class="st_cate">Cong Nghe</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center" style="width: 300px">
-                            <div class="icon-number">
-                                <i class="fa-regular fa-heart"></i>
-                                <p>312</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-eye"></i>
-                                <p>321</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-message"></i>
-                                <p>312</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="main-post ">
-                <div class="wrap_main-title">
-                    <h4 style="color: #F48023;">How to create admin dashboard for Finance Application?</h4>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-                <div class="wrap_author">
-                    <div style="padding-right: 20px;">
-                        <img width="30" height="30"
-                            src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
-                            alt="">
-                    </div>
-                    <div>
-                        <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
-                        <div class="d-flex align-items-center">
-                            <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">Trung Bao</p>
-                            <p style="color: grey;">1hour</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div
-                    style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
-                    <p style="color: grey; line-height: 25px;">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto illum accusantium repellendus
-                        ducimus quibusdam veritatis eos, corrupti asperiores, itaque vitae a, expedita officia
-                        recusandae
-                        totam rem amet provident ab. Dolor. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Nam
-                        tempora illum aut quibusdam consequuntur, minus mollitia necessitatibus id reiciendis deleniti?
-                        Distinctio vitae vero quis, necessitatibus aliquam ab explicabo unde eaque?
-                    </p>
-                </div>
-                <div>
-                    <div class="wrap-item-post d-flex justify-content-between align-items-center">
-                        <div class="">
-                            <div>
-                                <p class="st_cate">Cong Nghe</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center" style="width: 300px">
-                            <div class="icon-number">
-                                <i class="fa-regular fa-heart"></i>
-                                <p>312</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-eye"></i>
-                                <p>321</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-message"></i>
-                                <p>312</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
     </div>
 </div>
 

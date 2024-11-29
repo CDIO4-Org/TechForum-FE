@@ -1,1 +1,74 @@
 <app-navigation></app-navigation>
+<app-sidebar></app-sidebar>
+
+<div class="Post">
+    <div class="wrap-post">
+        <div>
+            <form [formGroup]="searchs">
+                <div class="wrap_btn-search">
+                    <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input formControlName="title" class="input_search" type="text"
+                        placeholder="Tìm kiếm bài viết ở đây...">
+                </div>
+            </form>
+        </div>
+
+        <div *ngFor="let item of blogList">
+            <a style="cursor: pointer" routerLink="/pages/components/blog-detail/{{item.id}}">
+                <div class="main-post">
+
+                    <div class="wrap_main-title">
+                        <h4 style="color: #F48023;">{{item.title}}</h4>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="wrap_author">
+                        <div style="padding-right: 20px;">
+                            <img width="30" height="30"
+                                src="{{item.user.avatar}}"
+                                alt="">
+                        </div>
+                        <div>
+                            <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
+                            <div class="d-flex align-items-center">
+                                <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">{{item.user.email}}</p>
+                                <p style="color: grey;">{{item.relativeTime}} trước</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div
+                        style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
+                        <p style="color: grey; line-height: 25px;">
+                            {{item.content}}
+                        </p>
+                    </div>
+                    <div>
+                        <div class="wrap-item-post d-flex justify-content-between align-items-center">
+                            <div class="">
+                                <div>
+                                    <p class="st_cate">{{item.category.name}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center" style="width: 300px">
+                                <div class="icon-number">
+                                    <i class="fa-regular fa-heart"></i>
+                                    <p>312</p>
+                                </div>
+                                <div class="icon-number">
+                                    <i class="fa-regular fa-eye"></i>
+                                    <p>321</p>
+                                </div>
+                                <div class="icon-number">
+                                    <i class="fa-regular fa-message"></i>
+                                    <p>312</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </a>
+        </div>
+
+    </div>
+</div>

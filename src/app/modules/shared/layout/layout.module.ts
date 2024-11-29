@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from '../../auth/auth-routing.module';
 import { LoadingComponent } from './loading/loading.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -22,7 +23,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     CommonModule,
     FormsModule,
     AuthRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
   exports: [
     HeaderComponent,

@@ -4,15 +4,18 @@
             <h4><strong>MENU</strong></h4>
         </div>
 
-        <div class="col_item">
-            <div>
-                <i class="fa-solid fa-house col_i"></i>
-                <a routerLink="">Trang Chủ</a>
+        <a routerLink="/pages/components/home-main">
+            <div class="col_item">
+                <div class="d-flex">
+                    <i class="fa-solid fa-house col_i"></i>
+                    <p>Trang Chủ</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
             </div>
-            <div>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-        </div>
+        </a>
+
 
         <div class="col_item" (click)="toggleDropdown()">
             <div>

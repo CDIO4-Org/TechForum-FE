@@ -10,6 +10,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthenticationModule } from '../shared/authentication/authentication.module';
 import { LayoutModule } from '../shared/layout/layout.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -27,7 +28,9 @@ import { LayoutModule } from '../shared/layout/layout.module';
     CommonModule,
     AuthRoutingModule,
     AuthenticationModule,
-    LayoutModule
+    LayoutModule,
+    ToastrModule.forRoot(),
+
   ]
 })
 export class AuthModule { }

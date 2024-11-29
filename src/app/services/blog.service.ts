@@ -21,14 +21,12 @@ export class BlogService {
     return this.http.post<Blogs>(this.API_BLOG + 'addNewBlog', blog);
   }
 
-  findById(id: number): Observable<Blogs> {
-    return this.http.get<Blogs>(this.API_BLOG + 'getByid/' +id);
+  findById(id: any): Observable<Blogs> {
+    return this.http.get<Blogs>(this.API_BLOG + 'getByid/' + id);
   }
-
 
   findByTitle(title: String): Observable<Blogs[]> {
     return this.http.get<Blogs[]>(this.API_BLOG + 'findByTitle' + '?title=' + title)
-
   }
 
 

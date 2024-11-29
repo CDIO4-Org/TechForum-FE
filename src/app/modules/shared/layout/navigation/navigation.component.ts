@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,7 @@ import { ImageDto } from 'src/app/models/dto/ImageDto';
 import { Blogs } from 'src/app/models/Blogs';
 
 
+declare var bootstrap: any;
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -23,15 +24,11 @@ export class NavigationComponent implements OnInit {
   blogForm: FormGroup;
   today: any = Date.now();
   selectedImage: any = null;
-  defaultImageUrl = 'Null';
-
-  @ViewChild('exampleModal', { static: false }) exampleModal: any;
-
-
+  defaultImageUrl = 'https://png.pngtree.com/png-vector/20190719/ourmid/pngtree-no-photo-png-image_1555358.jpg';
 
   userFake = {
     "id": 3,
-    "avatar": "https://example.com/avatar1.png",
+    "avatar": "https://png.pngtree.com/png-vector/20190719/ourmid/pngtree-no-photo-png-image_1555358.jpg",
     "firstName": "John",
     "lastName": "Doe",
     "email": "john.doe@example.com",
@@ -113,8 +110,22 @@ export class NavigationComponent implements OnInit {
     }
 
     const formData = this.blogForm.value;
-    this.blogService.createBlog(formData).subscribe((data: Blogs) => {
-    },);
+    this.blogService.createBlog(formData).subscribe({
+      next: (data: Blogs) => {
+        this.toastr.success('Blog created successfully!', 'Success');
+        const modalElement = document.getElementById('exampleModal');
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        modal.hide();
+        setTimeout(() => {
+          const backdrops = document.querySelectorAll('.modal-backdrop');
+          backdrops.forEach((backdrop) => backdrop.remove());
+        }, 200); 
+        modal.dispose();
+      },
+      error: (err) => {
+        this.toastr.error('Failed to create blog!', 'Error');
+      }
+    });
   }
 
   callApiAndSaveUrl(url: string) {

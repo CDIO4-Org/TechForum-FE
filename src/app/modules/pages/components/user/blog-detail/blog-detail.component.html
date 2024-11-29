@@ -1,1 +1,147 @@
-<p>blog-detail works!</p>
+<app-navigation></app-navigation>
+<app-sidebar></app-sidebar>
+
+<div class="Post">
+    <div class="wrap-post">
+        <nav aria-label="breadcrumb" style="margin-bottom: 20px;">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/pages/components/home-main" style="color: #F48023">Trang
+                        Chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Bài Viết Chi Tiết</li>
+            </ol>
+        </nav>
+
+        <div class="post-main">
+            <div class="wrap_title-post">
+                <div style="width: 68%;">
+                    <strong>
+                        <h3>{{blogs?.title}}</h3>
+                    </strong>
+                </div>
+                <div style="width: 25%;">
+                    <p>Ngày đăng: {{blogs?.beginDate}}</p>
+                </div>
+            </div>
+
+
+            <div class="wrap_img-post">
+                <div *ngFor="let item of imgs">
+                    <button style="outline: none;" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalImg" (click)="openImage(item)">
+                        <img [src]="item.nameImg" [alt]="item.altText || 'Post Image'" class="post-image" />
+                    </button>
+                </div>
+            </div>
+
+
+
+            <div class="wrap_content-post">
+                <p>
+                    {{blogs?.content}}
+                </p>
+            </div>
+
+            <div class="wrap-item-post d-flex justify-content-between align-items-center">
+                <div class="">
+                    <div>
+                        <p class="st_cate">{{blogs?.category.name}}</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="icon-number">
+                        <div>
+                            <button (click)="toggleLike(blogs.id)">
+                                <i class="fa-solid fa-heart st-i-func"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="icon-number">
+                        <div>
+                            <a>
+                                <i class="fa-solid fa-bookmark st-i-func" id="liveToastBtn"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="icon-number">
+                        <i style="cursor: pointer" class="fa-solid fa-flag st-i-func" data-bs-toggle="modal"
+                            data-bs-target="#report"></i>
+                    </div>
+                    <div class="icon-number">
+                        <a href="https://www.facebook.com">
+                            <i class="fa-solid fa-share st-i-func"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main-comment">
+            <h3 style="color: #808080; text-align: center; margin-bottom: 10px">Bình Luận</h3>
+            <div class="main_post_comment">
+                <form [formGroup]="cmtForm" (ngSubmit)="addNewComment()">
+                    <div class="mb-3">
+                        <textarea formControlName="content" class="form-control" name="comment" rows="3" required
+                            placeholder="Nhập bình luận...">
+                        </textarea>
+                    </div>
+                    <button type="submit" class="btn submit-button" style="margin: 0;"><i
+                            class="fa-regular fa-message"></i>
+                        Đăng
+                    </button>
+                </form>
+            </div>
+
+            <div *ngFor="let cmt of comments">
+                <div class="wrap-cmt">
+                    <div class="comment">
+                        <div class="user-info d-flex justify-content-between">
+                            <div>
+                                <p style="color: #ff5722;"><strong>{{cmt.blog.user.email}}</strong></p>
+                                <p class="comment-time" style="color: #bdb8b8; font-size: 12px">
+                                    {{cmt.date}}
+                                </p>
+                            </div>
+                            <div >
+                                <i class="fa-regular fa-circle-xmark" type="button"></i>
+
+                            </div>
+                        </div>
+                        <p class="comment-text"> {{cmt.content}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="main-info-author">
+        <img src="{{blogs?.user.avatar}}" alt="">
+        <h4 style="padding: 10px 40px; border-bottom: 1px solid darkgrey"><strong>
+                {{blogs?.user.firstName}}</strong>
+        </h4>
+        <div class="d-flex justify-content-center align-items-center st_info_icon">
+            <a href="">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal IMG -->
+    <div class="modal fade" id="exampleModalImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <img *ngIf="selectedImage" [src]="selectedImage.nameImg"
+                    [alt]="selectedImage.nameImg || 'Selected Image'" class="img-fluid" />
+            </div>
+        </div>
+    </div>

@@ -4,6 +4,9 @@ import { formatDistanceToNow } from 'date-fns';
 import { Blogs } from 'src/app/models/Blogs';
 import { BlogService } from 'src/app/services/blog.service';
 import { vi } from 'date-fns/locale';
+import { ImageService } from 'src/app/services/image.service';
+import { ImageDto } from 'src/app/models/dto/ImageDto';
+import { Images } from 'src/app/models/Images';
 
 @Component({
   selector: 'app-home-main',
@@ -15,7 +18,8 @@ export class HomeMainComponent implements OnInit {
   searchs: FormGroup;
 
   constructor(
-    private blogService: BlogService
+    private blogService: BlogService,
+    private imgService: ImageService
   ) {
     this.searchs = new FormGroup({
       title: new FormControl('')
@@ -26,6 +30,8 @@ export class HomeMainComponent implements OnInit {
     this.GetAll();
     this.setupSearchListener();
   }
+
+
 
   GetAll() {
     this.blogService.getAllBlog().subscribe((data: any[]) => {
@@ -51,4 +57,5 @@ export class HomeMainComponent implements OnInit {
       this.getWithName(title);
     });
   }
+
 }

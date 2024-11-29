@@ -4,6 +4,7 @@ import { ErrorComponent } from './error/error.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { SupportiveComponent } from './supportive.component';
 import { SupportiveRoutingModule } from './supportive-routing.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -15,7 +16,8 @@ import { SupportiveRoutingModule } from './supportive-routing.module';
   ],
   imports: [
     CommonModule,
-    SupportiveRoutingModule
+    SupportiveRoutingModule,
+    ToastrModule.forRoot(),
   ]
 })
 export class SupportiveModule { }

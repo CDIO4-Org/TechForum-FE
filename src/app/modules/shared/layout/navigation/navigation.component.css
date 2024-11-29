@@ -43,3 +43,7 @@
     background-color: #F48023 !important;
     color: white !important;
 }
+
+.modal-backdrop {
+    display: none !important;
+  }

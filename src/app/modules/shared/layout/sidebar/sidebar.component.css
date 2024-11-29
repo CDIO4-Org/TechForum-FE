@@ -36,7 +36,8 @@
 }
 
 .col_item:hover i,
-.col_item:hover a {
+.col_item:hover a,
+.col_item:hover p {
     color: #F48023;
 }
 

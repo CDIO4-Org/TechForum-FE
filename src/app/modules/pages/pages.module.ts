@@ -4,6 +4,7 @@ import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { LayoutModule } from '../shared/layout/layout.module';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -13,7 +14,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     PagesRoutingModule,
     LayoutModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(),
+
   ],
   exports: [
 

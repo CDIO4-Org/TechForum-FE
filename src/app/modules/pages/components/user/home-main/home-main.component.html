@@ -24,13 +24,13 @@
                     <div class="wrap_author">
                         <div style="padding-right: 20px;">
                             <img width="30" height="30"
-                                src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
+                                src="{{item.user.avatar}}"
                                 alt="">
                         </div>
                         <div>
                             <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
                             <div class="d-flex align-items-center">
-                                <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">Trung Bao</p>
+                                <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">{{item.user.email}}</p>
                                 <p style="color: grey;">{{item.relativeTime}} trước</p>
                             </div>
                         </div>

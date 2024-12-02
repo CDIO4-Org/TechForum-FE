@@ -8,7 +8,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 export class AuthRightComponent implements OnInit {
 
   constructor(
-    private render : Renderer2
+    private render: Renderer2
   ) { }
 
   ngOnInit(): void {

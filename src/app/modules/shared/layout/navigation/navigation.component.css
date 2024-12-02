@@ -8,6 +8,15 @@
     border-bottom: 1px solid #EAEAEA;
 }
 
+.wrap-btn {
+    position: relative;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
 .wrap-content-nav {
     width: 1400px;
     height: 84px;
@@ -28,6 +37,50 @@
 .wrap-icon-text div h2 {
     color: #F48023;
     margin: 0;
+}
+
+.avt_func div img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.wrap-drop-personal {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 70%;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 200px;
+}
+
+.wrap-drop-personal a {
+    color: black;
+    border-left: 4px solid white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.wrap-drop-personal a:hover {
+    background-color: #F7F7F7;
+    border-left: 4px solid #F48023;
+    color: #F48023;
+}
+
+.wrap-drop-personal a i{
+    padding-right: 10px;
+}
+
+.wrap-drop-personal a:hover i {
+    color: #F48023;
+}
+
+.avt_func:hover .wrap-drop-personal {
+    display: block;
 }
 
 .wrap-btn button {

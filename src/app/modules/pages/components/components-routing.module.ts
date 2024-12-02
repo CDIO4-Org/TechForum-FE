@@ -7,6 +7,8 @@ import { BlogDetailComponent } from './user/blog-detail/blog-detail.component';
 import { BlogLikedComponent } from './user/blog-liked/blog-liked.component';
 import { BlogBookmarkedComponent } from './user/blog-bookmarked/blog-bookmarked.component';
 import { BlogApproveComponent } from './admin/blog-approve/blog-approve.component';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { UserInfoComponent } from './user/user-info/user-info.component';
 
 
 
@@ -19,7 +21,8 @@ const routes: Routes = [
       { path: 'blog-liked', component: BlogLikedComponent },
       { path: 'blog-bookmarked', component: BlogBookmarkedComponent },
       { path: 'blog-approve', component: BlogApproveComponent },
-      { path: 'user-list', component: BlogApproveComponent },
+      { path: 'user-list', component: UserListComponent },
+      { path: 'info-personal', component: UserInfoComponent },
     ]
   }
 ];

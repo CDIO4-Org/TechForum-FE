@@ -51,7 +51,9 @@
                     <div class="icon-number">
                         <div>
                             <button (click)="toggleLike(blogs.id)">
-                                <i class="fa-solid fa-heart st-i-func"></i>
+                                <i class="fa-solid fa-heart st-i-func"
+                                [ngClass]="{'liked': liked}"
+                                (click)="checkLike()"></i>
                             </button>
                         </div>
 
@@ -105,7 +107,7 @@
                                     {{cmt.date}}
                                 </p>
                             </div>
-                            <div >
+                            <div>
                                 <i class="fa-regular fa-circle-xmark" type="button"></i>
 
                             </div>

@@ -93,11 +93,16 @@
     padding: 15px;
 }
 
+.icon-number button {
+    background: none;
+}
+
 
 .icon-number .st-i-func {
     margin-right: 5px;
     font-size: 25px;
 }
+
 
 .wrap-btn {
     position: relative;
@@ -174,4 +179,14 @@
 .st_info_icon a i {
     font-size: 18px;
     padding: 5px;
+}
+
+
+
+.fa-heart.liked {
+    color: red;
+}
+
+.liked {
+    color: red;
 }

@@ -9,6 +9,7 @@ import { BlogBookmarkedComponent } from './user/blog-bookmarked/blog-bookmarked.
 import { BlogApproveComponent } from './admin/blog-approve/blog-approve.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { UserInfoComponent } from './user/user-info/user-info.component';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
 
 
 
@@ -23,7 +24,7 @@ const routes: Routes = [
       { path: 'blog-approve', component: BlogApproveComponent },
       { path: 'user-list', component: UserListComponent },
       { path: 'info-personal', component: UserInfoComponent },
-    ]
+    ], canActivate:[AuthGuardService]
   }
 ];
 

@@ -51,9 +51,8 @@
                     <div class="icon-number">
                         <div>
                             <button (click)="toggleLike(blogs.id)">
-                                <i class="fa-solid fa-heart st-i-func"
-                                [ngClass]="{'liked': liked}"
-                                (click)="checkLike()"></i>
+                                <i class="fa-solid fa-heart st-i-func" [ngClass]="{'liked': liked}"
+                                    (click)="checkLike()"></i>
                             </button>
                         </div>
 
@@ -100,22 +99,21 @@
             <div *ngFor="let cmt of comments">
                 <div class="wrap-cmt">
                     <div class="comment">
-                        <div class="user-info d-flex justify-content-between">
-                            <div>
-                                <p style="color: #ff5722;"><strong>{{cmt.blog.user.email}}</strong></p>
-                                <p class="comment-time" style="color: #bdb8b8; font-size: 12px">
-                                    {{cmt.date}}
-                                </p>
+                        <div class="user-info d-flex justify-content-between align-items-center">
+                            <div class="user-details">
+                                <p class="user-email">{{ cmt.blog.user.firstName }} <span> {{ cmt.blog.user.lastName }}</span>  </p>
+                                <p class="comment-time">{{ cmt.date }}</p>
                             </div>
                             <div>
-                                <i class="fa-regular fa-circle-xmark" type="button"></i>
-
+                                <i (click)="getId(cmt.id)" class="fa-regular fa-circle-xmark delete-icon" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#deleteCmt"></i>
                             </div>
                         </div>
-                        <p class="comment-text"> {{cmt.content}}</p>
+                        <p class="comment-text">{{ cmt.content }}</p>
                     </div>
                 </div>
             </div>
+
         </div>
 
 
@@ -144,6 +142,23 @@
             <div class="modal-content">
                 <img *ngIf="selectedImage" [src]="selectedImage.nameImg"
                     [alt]="selectedImage.nameImg || 'Selected Image'" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div class="modal fade" id="deleteCmt" tabindex="-1" aria-labelledby="deleteCmtabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteCmtabel">Xoá bình luận</h1>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn xoá bình luận của chính mình
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" (click)="deleteCmt()" data-bs-dismiss="modal">Xác nhận</button>
+                </div>
             </div>
         </div>
     </div>

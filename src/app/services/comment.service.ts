@@ -19,4 +19,13 @@ export class CommentService {
   GetCmtById(id: any): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.API_COMMENT + 'findAllByIdBlog' + '?id=' + id)
   }
+
+  countCmt(blogId: any): Observable<Number> {
+    return this.http.get<Number>(this.API_COMMENT + 'countComment?blogId=' + blogId)
+  }
+
+  deleteCmt(id: any): Observable<string> {
+    return this.http.delete(this.API_COMMENT + 'deleteComment?id=' + id, { responseType: 'text' });
+  }
+  
 }

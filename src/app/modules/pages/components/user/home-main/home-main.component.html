@@ -14,7 +14,7 @@
         </div>
 
         <div *ngFor="let item of blogList">
-            <a style="cursor: pointer" routerLink="/pages/components/blog-detail/{{item.id}}">
+            <a style="cursor: pointer" routerLink="/pages/components/blog-detail/{{item.id}}" (click)="toogleView(item.id)">
                 <div class="main-post">
 
                     <div class="wrap_main-title">
@@ -55,11 +55,11 @@
                                 </div>
                                 <div class="icon-number">
                                     <i class="fa-regular fa-eye"></i>
-                                    <p>321</p>
+                                    <p>{{item.viewCount}}</p>
                                 </div>
                                 <div class="icon-number">
                                     <i class="fa-regular fa-message"></i>
-                                    <p>312</p>
+                                    <p>{{item.cmtCount}}</p>
                                 </div>
                             </div>
                         </div>

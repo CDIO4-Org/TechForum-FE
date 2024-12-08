@@ -22,6 +22,7 @@ export class BlogDetailComponent implements OnInit {
   cmtForm: FormGroup;
   selectedImage: ImageDto | null = null;
   liked: boolean = false;
+  idDelete: any
 
 
 
@@ -127,6 +128,17 @@ export class BlogDetailComponent implements OnInit {
 
   checkLike() {
     this.liked = !this.liked;
+  }
+
+  getId(id){
+    this.idDelete = id;
+  }
+
+  deleteCmt(){
+    this.commentService.deleteCmt(this.idDelete).subscribe(data => {
+      this.toast.success('Thanks')
+      this.ngOnInit()
+    })
   }
 
 }

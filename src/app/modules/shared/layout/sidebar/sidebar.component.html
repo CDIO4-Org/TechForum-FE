@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="col_item" (click)="toggleDropdown3()">
+        <div class="col_item" (click)="toggleDropdown3()" *ngIf="setupSidebar()">
             <div>
                 <i class="fa-solid fa-user-tie col_i"></i>
                 <a>Chức Năng Admin</a>

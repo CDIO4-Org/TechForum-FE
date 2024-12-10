@@ -17,6 +17,7 @@ import { CommentService } from 'src/app/services/comment.service';
   styleUrls: ['./home-main.component.css']
 })
 export class HomeMainComponent implements OnInit {
+  spinner: boolean = true
   blogList: Blogs[] = [];
   items: any[] = [];
   searchs: FormGroup;
@@ -63,6 +64,9 @@ export class HomeMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(()=>{
+      this.spinner = false;
+    }, 750)
     this.GetAll();
     this.setupSearchListener();
   }

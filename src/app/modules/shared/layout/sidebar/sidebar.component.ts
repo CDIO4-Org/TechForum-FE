@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetCate();
+    this.setupSidebar();
   }
 
   toggleDropdown() {
@@ -38,5 +39,16 @@ export class SidebarComponent implements OnInit {
     this.cateService.findAll().subscribe((data: any) =>{
       this.cateList = data;
     })
+  }
+
+  setupSidebar(): boolean{
+    const roleData = localStorage.getItem('Role_Key');
+    const roles = JSON.parse(roleData);
+    for(let role of roles){
+      if(role.authority === 'ADMIN'){
+        return true
+      }
+    }
+    return false;
   }
 }

@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     setTimeout(()=>{
       this.spinner = false;
     }, 750)
+    this.Load();
   }
   
 
@@ -43,5 +44,10 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-
+  
+  Load(){
+    if(this.jwtService.verifyToken()){
+      this.router.navigateByUrl("/pages/components/home-main");
+    }
+  }
 }

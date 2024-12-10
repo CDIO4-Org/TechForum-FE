@@ -14,9 +14,10 @@ import { Images } from 'src/app/models/Images';
   styleUrls: ['./home-main.component.css']
 })
 export class HomeMainComponent implements OnInit {
+  spinner: boolean = true
   blogList: Blogs[] = [];
   searchs: FormGroup;
-
+  
   constructor(
     private blogService: BlogService,
     private imgService: ImageService
@@ -27,6 +28,9 @@ export class HomeMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(()=>{
+      this.spinner = false;
+    }, 750)
     this.GetAll();
     this.setupSearchListener();
   }
@@ -57,5 +61,7 @@ export class HomeMainComponent implements OnInit {
       this.getWithName(title);
     });
   }
+
+  
 
 }

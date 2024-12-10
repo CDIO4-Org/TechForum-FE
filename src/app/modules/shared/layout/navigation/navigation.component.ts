@@ -11,6 +11,8 @@ import { finalize } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { ImageDto } from 'src/app/models/dto/ImageDto';
 import { Blogs } from 'src/app/models/Blogs';
+import { AccountService } from 'src/app/services/account.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 declare var bootstrap: any;
@@ -25,30 +27,26 @@ export class NavigationComponent implements OnInit {
   today: any = Date.now();
   selectedImage: any = null;
   defaultImageUrl = 'https://png.pngtree.com/png-vector/20190719/ourmid/pngtree-no-photo-png-image_1555358.jpg';
-
+  user: any;
   userFake = {
     "id": 3,
-    "avatar": "https://png.pngtree.com/png-vector/20190719/ourmid/pngtree-no-photo-png-image_1555358.jpg",
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john.doe@example.com",
-    "gender": 1,
-    "phoneNumber": "1234567890",
-    "birthDate": "1990-01-01",
-    "address": "123 Main Street",
+    "avatar": null,
+    "firstName": null,
+    "lastName": null,
+    "email": "baokx2k3@gmail.com",
+    "gender": null,
+    "phoneNumber": null,
+    "birthDate": null,
+    "address": null,
     "account": {
-      "id": 1,
-      "accountName": "john_doe",
+      "id": 5,
+      "accountName": "Vovanhoang212",
       "password": "hashed_password1",
       "status": true,
       "roles": [
         {
-          "id": 2,
-          "roleName": "USER"
-        },
-        {
           "id": 1,
-          "roleName": "ADMIN"
+          "roleName": "USER"
         }
       ]
     }
@@ -58,6 +56,7 @@ export class NavigationComponent implements OnInit {
 
 
   constructor(
+    private accountService: AccountService,
     private renderer: Renderer2,
     private blogService: BlogService,
     private cateService: CategoryService,
@@ -66,11 +65,13 @@ export class NavigationComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private elementRef: ElementRef,
+    private userService: UserService,
     @Inject(AngularFireStorage) private storage: AngularFireStorage
   ) { }
 
   ngOnInit(): void {
-    this.getCategories()
+    this.getCategories();
+    // this.userService;
     this.blogForm = new FormGroup({
       title: new FormControl(''),
       beginDate: new FormControl(''),
@@ -145,6 +146,10 @@ export class NavigationComponent implements OnInit {
 
   showPreview(event: any) {
     this.selectedImage = event.target.files;
+  }
+
+  onLogout(){
+    this.accountService.logout();
   }
 
 }

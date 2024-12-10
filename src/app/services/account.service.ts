@@ -33,9 +33,10 @@ export class AccountService {
   }
 
   logout(){
-    // sessionStorage.removeItem('Token_Key');
-    // sessionStorage.removeItem('Name_key');
-    // sessionStorage.removeItem('Role_Key');
+    this.jwtService.removeDate();
+    this.jwtService.removeName();
+    this.jwtService.removeRoles();
+    this.jwtService.removeToken();
     this.router.navigateByUrl("/auth/login");
   }
 }

@@ -10,6 +10,7 @@ import { BlogApproveComponent } from './admin/blog-approve/blog-approve.componen
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { UserInfoComponent } from './user/user-info/user-info.component';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { AccountRole } from 'src/app/models/AccountRole';
 
 
 
@@ -17,14 +18,14 @@ const routes: Routes = [
   {
     path: '', component: ComponentsComponent,
     children: [
-      { path: 'home-main', component: HomeMainComponent },
-      { path: 'blog-detail/:id', component: BlogDetailComponent },
-      { path: 'blog-liked', component: BlogLikedComponent },
-      { path: 'blog-bookmarked', component: BlogBookmarkedComponent },
-      { path: 'blog-approve', component: BlogApproveComponent },
-      { path: 'user-list', component: UserListComponent },
-      { path: 'info-personal', component: UserInfoComponent },
-    ], canActivate:[AuthGuardService]
+      { path: 'home-main', component: HomeMainComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN', 'USER']} },
+      { path: 'blog-detail/:id', component: BlogDetailComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN', 'USER']} },
+      { path: 'blog-liked', component: BlogLikedComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN', 'USER']} },
+      { path: 'blog-bookmarked', component: BlogBookmarkedComponent, canActivate:[AuthGuardService], data:{roles:['ADMIN', 'USER']} },
+      { path: 'blog-approve', component: BlogApproveComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN']} },
+      { path: 'user-list', component: UserListComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN']} },
+      { path: 'info-personal', component: UserInfoComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN', 'USER']} },
+    ]
   }
 ];
 

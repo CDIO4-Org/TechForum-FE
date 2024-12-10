@@ -1,3 +1,5 @@
+<div *ngIf="!spinner">
+
 <app-navigation></app-navigation>
 <app-sidebar></app-sidebar>
 
@@ -14,7 +16,7 @@
         </div>
 
         <div *ngFor="let item of blogList">
-            <a style="cursor: pointer" routerLink="/pages/components/blog-detail/{{item.id}}">
+            <a style="cursor: pointer" routerLink="/pages/components/blog-detail/{{item.id}}" (click)="toogleView(item.id)">
                 <div class="main-post">
 
                     <div class="wrap_main-title">
@@ -23,14 +25,13 @@
                     </div>
                     <div class="wrap_author">
                         <div style="padding-right: 20px;">
-                            <img width="30" height="30"
-                                src="{{item.user.avatar}}"
-                                alt="">
+                            <img width="30" height="30" src="{{item.user.avatar}}" alt="">
                         </div>
                         <div>
                             <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
                             <div class="d-flex align-items-center">
-                                <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">{{item.user.email}}</p>
+                                <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">{{item.user.email}}
+                                </p>
                                 <p style="color: grey;">{{item.relativeTime}} trước</p>
                             </div>
                         </div>
@@ -52,15 +53,15 @@
                             <div class="d-flex justify-content-between align-items-center" style="width: 300px">
                                 <div class="icon-number">
                                     <i class="fa-regular fa-heart"></i>
-                                    <p>312</p>
+                                    <p>{{item.likeCount}}</p>
                                 </div>
                                 <div class="icon-number">
                                     <i class="fa-regular fa-eye"></i>
-                                    <p>321</p>
+                                    <p>{{item.viewCount}}</p>
                                 </div>
                                 <div class="icon-number">
                                     <i class="fa-regular fa-message"></i>
-                                    <p>312</p>
+                                    <p>{{item.cmtCount}}</p>
                                 </div>
                             </div>
                         </div>
@@ -71,4 +72,8 @@
         </div>
 
     </div>
+</div>
+</div>
+<div *ngIf="spinner">
+    <app-loading></app-loading>
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { da } from 'date-fns/locale';
+import { da, id } from 'date-fns/locale';
 import { ToastrService } from 'ngx-toastr';
 import { Blogs } from 'src/app/models/Blogs';
 import { ImageDto } from 'src/app/models/dto/ImageDto';
@@ -21,6 +21,10 @@ export class BlogDetailComponent implements OnInit {
   comments: Comment[] = [];
   cmtForm: FormGroup;
   selectedImage: ImageDto | null = null;
+  liked: boolean = false;
+  idDelete: any
+
+
 
 
   userFake = {
@@ -51,44 +55,6 @@ export class BlogDetailComponent implements OnInit {
     }
   }
 
-  blogaaa = {
-    "id": 88,
-    "title": "Giới thiệu về công nghệ Angular",
-    "beginDate": "2024-11-18T21:10:23.499248",
-    "content": "<p>Nội dung blog về Angular...</p>",
-    "status": true,
-    "user": {
-      "id": 3,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b",
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john.doe@example.com",
-      "gender": 1,
-      "phoneNumber": "1234567890",
-      "birthDate": "1990-01-01",
-      "address": "123 Main Street",
-      "account": {
-        "id": 1,
-        "accountName": "john_doe",
-        "password": "hashed_password1",
-        "status": true,
-        "roles": [
-          {
-            "id": 2,
-            "roleName": "USER"
-          },
-          {
-            "id": 1,
-            "roleName": "ADMIN"
-          }
-        ]
-      }
-    },
-    "category": {
-      "id": 1,
-      "name": "Công Nghệ"
-    }
-  }
 
 
   constructor(
@@ -101,6 +67,7 @@ export class BlogDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.checkLike()
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       const activeID = params.get("id");
       if (activeID) {
@@ -109,15 +76,22 @@ export class BlogDetailComponent implements OnInit {
           this.cmtForm.patchValue({
             blog: this.blogs
           })
+
+          this.likeService.CheckLiked(this.blogs.id, this.userFake.id).subscribe(data => {
+            this.liked = data;
+          });
+
         });
 
         this.imgService.findByIdImgBlog(activeID).subscribe((images: any) => {
           this.imgs = images;
         });
 
-        this.commentService.GetCmtById(activeID).subscribe(data =>{
+        this.commentService.GetCmtById(activeID).subscribe(data => {
           this.comments = data;
         })
+
+
       }
     });
 
@@ -146,10 +120,25 @@ export class BlogDetailComponent implements OnInit {
     }
   }
 
-  toggleLike(id: number){
-    console.log(id, this.userFake.id)
+  toggleLike(id: number) {
     this.likeService.ToggleLike(id, this.userFake.id).subscribe(data => {
-      this.toast.success('Thanks u')
+
     })
   }
+
+  checkLike() {
+    this.liked = !this.liked;
+  }
+
+  getId(id){
+    this.idDelete = id;
+  }
+
+  deleteCmt(){
+    this.commentService.deleteCmt(this.idDelete).subscribe(data => {
+      this.toast.success('Thanks')
+      this.ngOnInit()
+    })
+  }
+
 }

@@ -14,6 +14,7 @@ import { BlogPostedComponent } from './user/blog-posted/blog-posted.component';
 import { LayoutModule } from '../../shared/layout/layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
 
 
 
@@ -29,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
     BlogApproveComponent,
     UserListComponent,
     BlogPostedComponent,
+    ManageCategoryComponent,
   ],
   imports: [
     CommonModule,

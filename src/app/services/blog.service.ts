@@ -14,7 +14,7 @@ export class BlogService {
   ) { }
 
   getAllBlog(): Observable<Blogs[]> {
-    return this.http.get<Blogs[]>(this.API_BLOG + 'activedBlogs')
+    return this.http.get<Blogs[]>(this.API_BLOG)
   }
 
   createBlog(blog: Blogs): Observable<Blogs> {

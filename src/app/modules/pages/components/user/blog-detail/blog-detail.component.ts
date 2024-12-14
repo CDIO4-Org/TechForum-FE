@@ -110,12 +110,12 @@ export class BlogDetailComponent implements OnInit {
   }
 
   addNewComment() {
-    console.log(this.cmtForm.value)
     if (this.cmtForm.invalid) {
       this.toast.error('Vui lòng nhập thông tin')
     } else {
       this.commentService.AddNewComment(this.cmtForm.value).subscribe(data => {
         this.toast.success('Thanks u')
+        this.ngOnInit();
       })
     }
   }

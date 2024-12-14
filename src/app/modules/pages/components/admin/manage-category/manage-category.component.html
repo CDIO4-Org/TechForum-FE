@@ -1,2 +1,66 @@
 <app-navigation></app-navigation>
 <app-sidebar></app-sidebar>
+
+<div class="Post">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/pages/components/home-main" style="color: #F48023">Trang Chủ</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Quản lý chủ đề</li>
+        </ol>
+    </nav>
+    <div class="wrap-post">
+        <h3 style="text-align: center; margin-bottom: 10px; font-weight: bold">QUẢN LÝ CHỦ ĐỀ</h3>
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="add-topic-btn" type="button" data-bs-toggle="modal" data-bs-target="#add">Thêm Mới Chủ
+                Đề</button>
+        </div>
+        <div class="topics-container">
+            <div *ngFor="let item of cateList">
+                <button (click)="getId(item.id)" type="button" data-bs-toggle="modal" data-bs-target="#delete">
+                    <p class="st_cate">{{item.name}} <i class="fa-regular fa-circle-xmark delete-icon"></i></p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Delete -->
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteLabel">Xoá chủ đề</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có muốn xoá
+            </div>
+            <div class="modal-footer">
+                <button (click)="deleteCate()" data-bs-dismiss="modal" type="button" class="add-topic-btn">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal ADD -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="addLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addLabel">Thêm mới chủ đề</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="cateForm" (ngSubmit)="addNewCate()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="text" formControlName="name" id="name" class="form-control" placeholder="Nhập tên chủ đề...">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" data-bs-dismiss="modal" class="btn btn-primary add-topic-btn">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

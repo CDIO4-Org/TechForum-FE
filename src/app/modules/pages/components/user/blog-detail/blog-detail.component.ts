@@ -5,10 +5,12 @@ import { da, id } from 'date-fns/locale';
 import { ToastrService } from 'ngx-toastr';
 import { Blogs } from 'src/app/models/Blogs';
 import { ImageDto } from 'src/app/models/dto/ImageDto';
+import { BlogStorageService } from 'src/app/services/blog-storage.service';
 import { BlogService } from 'src/app/services/blog.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { ImageService } from 'src/app/services/image.service';
 import { LikeService } from 'src/app/services/like.service';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -20,8 +22,10 @@ export class BlogDetailComponent implements OnInit {
   imgs: ImageDto[] = [];
   comments: Comment[] = [];
   cmtForm: FormGroup;
+  reportForm: FormGroup;
   selectedImage: ImageDto | null = null;
   liked: boolean = false;
+  bookmarked: boolean = false;
   idDelete: any
 
 
@@ -63,11 +67,14 @@ export class BlogDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private commentService: CommentService,
     private likeService: LikeService,
+    private bookMarkedSer: BlogStorageService,
+    private reportService: ReportService,
     private toast: ToastrService,
   ) { }
 
   ngOnInit(): void {
-    this.checkLike()
+    this.checkBM();
+    this.checkLike();
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       const activeID = params.get("id");
       if (activeID) {
@@ -77,8 +84,16 @@ export class BlogDetailComponent implements OnInit {
             blog: this.blogs
           })
 
+          this.reportForm.patchValue({
+            blog: this.blogs
+          })
+
           this.likeService.CheckLiked(this.blogs.id, this.userFake.id).subscribe(data => {
             this.liked = data;
+          });
+
+          this.bookMarkedSer.CheckBookMarked(this.blogs.id, this.userFake.id).subscribe(data => {
+            this.bookmarked = data;
           });
 
         });
@@ -96,6 +111,13 @@ export class BlogDetailComponent implements OnInit {
     });
 
     this.cmtForm = new FormGroup({
+      content: new FormControl(''),
+      date: new FormControl(''),
+      blog: new FormControl(''),
+      user: new FormControl(this.userFake)
+    })
+
+    this.reportForm = new FormGroup({
       content: new FormControl(''),
       date: new FormControl(''),
       blog: new FormControl(''),
@@ -126,19 +148,42 @@ export class BlogDetailComponent implements OnInit {
     })
   }
 
+  toggleBM(id: number) {
+    this.bookMarkedSer.ToggleBM(id, this.userFake.id).subscribe(data => {
+
+    })
+  }
+
   checkLike() {
     this.liked = !this.liked;
   }
 
-  getId(id){
+  checkBM() {
+    this.bookmarked = !this.bookmarked;
+  }
+
+  getId(id) {
     this.idDelete = id;
   }
 
-  deleteCmt(){
+  deleteCmt() {
     this.commentService.deleteCmt(this.idDelete).subscribe(data => {
       this.toast.success('Thanks')
       this.ngOnInit()
     })
+  }
+
+  addNewRp() {
+    if (this.reportForm.invalid) {
+      this.toast.warning('aaaa')
+    } else {
+      this.reportService.addNewReport(this.reportForm.value).subscribe(
+        data => {
+          this.toast.success('thanh cong')
+          this.ngOnInit();
+        }
+      )
+    }
   }
 
 }

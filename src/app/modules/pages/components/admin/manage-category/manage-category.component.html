@@ -30,8 +30,9 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteLabel">Xoá chủ đề</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title text-center fs-4" id="exampleModalLabel" style="text-align: center; font-weight: bold;">
+                    Xoá chủ đề
+                 </h1>
             </div>
             <div class="modal-body">
                 Bạn có muốn xoá
@@ -48,8 +49,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addLabel">Thêm mới chủ đề</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title text-center fs-4" id="exampleModalLabel" style="text-align: center; font-weight: bold;">
+                   Thêm mới chủ đề
+                </h1>
+
             </div>
             <form [formGroup]="cateForm" (ngSubmit)="addNewCate()">
                 <div class="modal-body">

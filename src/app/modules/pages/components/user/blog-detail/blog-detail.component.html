@@ -60,9 +60,11 @@
 
                     <div class="icon-number">
                         <div>
-                            <a>
-                                <i class="fa-solid fa-bookmark st-i-func" id="liveToastBtn"></i>
-                            </a>
+
+                            <button (click)="toggleBM(blogs.id)">
+                                <i class="fa-solid fa-bookmark st-i-func" [ngClass]="{'bookmarked': bookmarked}"
+                                    (click)="checkBM()"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -101,7 +103,8 @@
                     <div class="comment">
                         <div class="user-info d-flex justify-content-between align-items-center">
                             <div class="user-details">
-                                <p class="user-email">{{ cmt.blog.user.firstName }} <span> {{ cmt.blog.user.lastName }}</span>  </p>
+                                <p class="user-email">{{ cmt.blog.user.firstName }} <span> {{ cmt.blog.user.lastName
+                                        }}</span> </p>
                                 <p class="comment-time">{{ cmt.date }}</p>
                             </div>
                             <div>
@@ -151,7 +154,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteCmtabel">Xoá bình luận</h1>
+                    <h1 class="modal-title text-center fs-4" id="exampleModalLabel"
+                        style="text-align: center; font-weight: bold;">
+                        Xoá bình luận
+                    </h1>
                 </div>
                 <div class="modal-body">
                     Bạn có muốn xoá bình luận của chính mình
@@ -162,3 +168,90 @@
             </div>
         </div>
     </div>
+
+
+    <!--Modal Report-->
+    <div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-4 w-100 text-center fw-bold" id="exampleModalLabel">
+                        Báo Cáo
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="mb-4 text-secondary">
+                        Hãy chọn vấn đề:
+                    </h4>
+                    <form [formGroup]="reportForm" (ngSubmit)="addNewRp()">
+                        <div class="d-flex flex-column gap-3">
+                            <div class="form-check">
+                                <input formControlName="content" name="content"
+                                    value="Bài đăng, bình luận hoặc nội dung khác mà người dùng cho là không phù hợp hoặc gây phản cảm."
+                                    class="form-check-input" type="radio"id="0">
+                                <label class="form-check-label" for="0">
+                                    Bài đăng, bình luận hoặc nội dung khác mà người dùng cho là không phù hợp hoặc gây
+                                    phản cảm.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input formControlName="content" name="content" value="Nội dung spam, quảng cáo không phù hợp hoặc vi phạm các quy định về quảng cáo trên
+                                diễn đàn." class="form-check-input" type="radio" id="1">
+                                <label class="form-check-label" for="1">
+                                    Nội dung spam, quảng cáo không phù hợp hoặc vi phạm các quy định về quảng cáo trên
+                                    diễn đàn.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input formControlName="content" name="content" value="Hành vi quấy rối, phân biệt đối xử hoặc gây phiền hà đối với bản thân hoặc thành
+                                viên khác trong cộng đồng." class="form-check-input" type="radio" id="2">
+                                <label class="form-check-label" for="2">
+                                    Hành vi quấy rối, phân biệt đối xử hoặc gây phiền hà đối với bản thân hoặc thành
+                                    viên khác trong cộng đồng.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input formControlName="content" name="content" value="Bài đăng hoặc thông tin không chính xác, thiếu chính xác hoặc tin giả được chia sẻ
+                                trên diễn đàn." class="form-check-input" type="radio" id="3">
+                                <label class="form-check-label" for="3">
+                                    Bài đăng hoặc thông tin không chính xác, thiếu chính xác hoặc tin giả được chia sẻ
+                                    trên diễn đàn.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input formControlName="content" name="content" value="Hoạt động hoặc nội dung vi phạm pháp luật, bao gồm vi phạm bản quyền, lạm dụng trẻ
+                                em hoặc nội dung liên quan đến tội phạm." class="form-check-input" type="radio"
+                                 id="4">
+                                <label class="form-check-label" for="4">
+                                    Hoạt động hoặc nội dung vi phạm pháp luật, bao gồm vi phạm bản quyền, lạm dụng trẻ
+                                    em hoặc nội dung liên quan đến tội phạm.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input formControlName="content" name="content"
+                                    value="Bài đăng hoặc bình luận sử dụng ngôn ngữ không tôn trọng, châm biếm hoặc kích động."
+                                    class="form-check-input" type="radio" id="5">
+                                <label class="form-check-label" for="5">
+                                    Bài đăng hoặc bình luận sử dụng ngôn ngữ không tôn trọng, châm biếm hoặc kích động.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input formControlName="content" name="content" value="Hành vi lạm dụng tài khoản hoặc gian lận, bao gồm việc sử dụng tài khoản giả mạo
+                                hoặc hack tài khoản." class="form-check-input" type="radio" id="6">
+                                <label class="form-check-label" for="6">
+                                    Hành vi lạm dụng tài khoản hoặc gian lận, bao gồm việc sử dụng tài khoản giả mạo
+                                    hoặc hack tài khoản.
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-4">
+                            <button type="submit" class="btn" data-bs-dismiss="modal">Xác
+                                Nhận</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,14 +18,14 @@ const routes: Routes = [
   {
     path: '', component: ComponentsComponent,
     children: [
-      { path: 'home-main', component: HomeMainComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN', 'USER']} },
-      { path: 'blog-detail/:id', component: BlogDetailComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN', 'USER']} },
-      { path: 'blog-liked', component: BlogLikedComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN', 'USER']} },
-      { path: 'blog-bookmarked', component: BlogBookmarkedComponent, canActivate:[AuthGuardService], data:{roles:['ADMIN', 'USER']} },
-      { path: 'blog-approve', component: BlogApproveComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN']} },
-      { path: 'user-list', component: UserListComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN']} },
-      { path: 'info-personal', component: UserInfoComponent, canActivate:[AuthGuardService], data:{roles: ['ADMIN', 'USER']} },
-      { path: 'manage-categories', component: ManageCategoryComponent },
+      { path: 'home-main', component: HomeMainComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN', 'USER'] } },
+      { path: 'blog-detail/:id', component: BlogDetailComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN', 'USER'] } },
+      { path: 'blog-liked', component: BlogLikedComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN', 'USER'] } },
+      { path: 'blog-bookmarked', component: BlogBookmarkedComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN', 'USER'] } },
+      { path: 'blog-approve', component: BlogApproveComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] } },
+      { path: 'user-list', component: UserListComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] } },
+      { path: 'info-personal', component: UserInfoComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN', 'USER'] } },
+      { path: 'manage-categories', component: ManageCategoryComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] } },
     ]
   }
 ];

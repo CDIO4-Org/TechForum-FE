@@ -114,6 +114,7 @@ export class NavigationComponent implements OnInit {
     this.blogService.createBlog(formData).subscribe({
       next: (data: Blogs) => {
         this.toastr.success('Blog created successfully!', 'Success');
+        this.ngOnInit();
         const modalElement = document.getElementById('exampleModal');
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();

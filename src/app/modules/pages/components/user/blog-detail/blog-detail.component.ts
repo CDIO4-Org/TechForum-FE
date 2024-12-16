@@ -26,7 +26,9 @@ export class BlogDetailComponent implements OnInit {
   selectedImage: ImageDto | null = null;
   liked: boolean = false;
   bookmarked: boolean = false;
-  idDelete: any
+  idDelete: any;
+  spinner: boolean = true
+
 
 
 
@@ -73,6 +75,9 @@ export class BlogDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    setTimeout(()=>{
+      this.spinner = false;
+    }, 750)
     this.checkBM();
     this.checkLike();
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {

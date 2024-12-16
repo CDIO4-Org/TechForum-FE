@@ -1,257 +1,271 @@
-<app-navigation></app-navigation>
-<app-sidebar></app-sidebar>
-
-<div class="Post">
-    <div class="wrap-post">
-        <nav aria-label="breadcrumb" style="margin-bottom: 20px;">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="/pages/components/home-main" style="color: #F48023">Trang
-                        Chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Bài Viết Chi Tiết</li>
-            </ol>
-        </nav>
-
-        <div class="post-main">
-            <div class="wrap_title-post">
-                <div style="width: 68%;">
-                    <strong>
-                        <h3>{{blogs?.title}}</h3>
-                    </strong>
-                </div>
-                <div style="width: 25%;">
-                    <p>Ngày đăng: {{blogs?.beginDate}}</p>
-                </div>
-            </div>
+<div *ngIf="!spinner">
 
 
-            <div class="wrap_img-post">
-                <div *ngFor="let item of imgs">
-                    <button style="outline: none;" type="button" data-bs-toggle="modal"
-                        data-bs-target="#exampleModalImg" (click)="openImage(item)">
-                        <img [src]="item.nameImg" [alt]="item.altText || 'Post Image'" class="post-image" />
-                    </button>
-                </div>
-            </div>
+    <app-navigation></app-navigation>
+    <app-sidebar></app-sidebar>
 
+    <div class="Post">
+        <div class="wrap-post">
+            <nav aria-label="breadcrumb" style="margin-bottom: 20px;">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/pages/components/home-main" style="color: #F48023">Trang
+                            Chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Bài Viết Chi Tiết</li>
+                </ol>
+            </nav>
 
-
-            <div class="wrap_content-post">
-                <p>
-                    {{blogs?.content}}
-                </p>
-            </div>
-
-            <div class="wrap-item-post d-flex justify-content-between align-items-center">
-                <div class="">
-                    <div>
-                        <p class="st_cate">{{blogs?.category.name}}</p>
+            <div class="post-main">
+                <div class="wrap_title-post">
+                    <div style="width: 68%;">
+                        <strong>
+                            <h3>{{blogs?.title}}</h3>
+                        </strong>
+                    </div>
+                    <div style="width: 25%;">
+                        <p>Ngày đăng: {{blogs?.beginDate | date: 'short'}}</p>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="icon-number">
-                        <div>
-                            <button (click)="toggleLike(blogs.id)">
-                                <i class="fa-solid fa-heart st-i-func" [ngClass]="{'liked': liked}"
-                                    (click)="checkLike()"></i>
-                            </button>
-                        </div>
 
+
+                <div class="wrap_img-post">
+                    <div *ngFor="let item of imgs">
+                        <button style="outline: none;" type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalImg" (click)="openImage(item)">
+                            <img [src]="item.nameImg" [alt]="item.altText || 'Post Image'" class="post-image" />
+                        </button>
                     </div>
+                </div>
 
-                    <div class="icon-number">
+
+
+                <div class="wrap_content-post">
+                    <p>
+                        {{blogs?.content}}
+                    </p>
+                </div>
+
+                <div class="wrap-item-post d-flex justify-content-between align-items-center">
+                    <div class="">
                         <div>
-
-                            <button (click)="toggleBM(blogs.id)">
-                                <i class="fa-solid fa-bookmark st-i-func" [ngClass]="{'bookmarked': bookmarked}"
-                                    (click)="checkBM()"></i>
-                            </button>
+                            <p class="st_cate">{{blogs?.category.name}}</p>
                         </div>
                     </div>
-
-                    <div class="icon-number">
-                        <i style="cursor: pointer" class="fa-solid fa-flag st-i-func" data-bs-toggle="modal"
-                            data-bs-target="#report"></i>
-                    </div>
-                    <div class="icon-number">
-                        <a href="https://www.facebook.com">
-                            <i class="fa-solid fa-share st-i-func"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="main-comment">
-            <h3 style="color: #808080; text-align: center; margin-bottom: 10px">Bình Luận</h3>
-            <div class="main_post_comment">
-                <form [formGroup]="cmtForm" (ngSubmit)="addNewComment()">
-                    <div class="mb-3">
-                        <textarea formControlName="content" class="form-control" name="comment" rows="3" required
-                            placeholder="Nhập bình luận...">
-                        </textarea>
-                    </div>
-                    <button type="submit" class="btn submit-button" style="margin: 0;"><i
-                            class="fa-regular fa-message"></i>
-                        Đăng
-                    </button>
-                </form>
-            </div>
-
-            <div *ngFor="let cmt of comments">
-                <div class="wrap-cmt">
-                    <div class="comment">
-                        <div class="user-info d-flex justify-content-between align-items-center">
-                            <div class="user-details">
-                                <p class="user-email">{{ cmt.blog.user.firstName }} <span> {{ cmt.blog.user.lastName
-                                        }}</span> </p>
-                                <p class="comment-time">{{ cmt.date }}</p>
-                            </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="icon-number">
                             <div>
-                                <i (click)="getId(cmt.id)" class="fa-regular fa-circle-xmark delete-icon" type="button"
-                                    data-bs-toggle="modal" data-bs-target="#deleteCmt"></i>
+                                <button (click)="toggleLike(blogs.id)">
+                                    <i class="fa-solid fa-heart st-i-func" [ngClass]="{'liked': liked}"
+                                        (click)="checkLike()"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="icon-number">
+                            <div>
+
+                                <button (click)="toggleBM(blogs.id)">
+                                    <i class="fa-solid fa-bookmark st-i-func" [ngClass]="{'bookmarked': bookmarked}"
+                                        (click)="checkBM()"></i>
+                                </button>
                             </div>
                         </div>
-                        <p class="comment-text">{{ cmt.content }}</p>
+
+                        <div class="icon-number">
+                            <i style="cursor: pointer" class="fa-solid fa-flag st-i-func" data-bs-toggle="modal"
+                                data-bs-target="#report"></i>
+                        </div>
+                        <div class="icon-number">
+                            <a href="https://www.facebook.com">
+                                <i class="fa-solid fa-share st-i-func"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
-
-
-    </div>
-    <div class="main-info-author">
-        <img src="{{blogs?.user.avatar}}" alt="">
-        <h4 style="padding: 10px 40px; border-bottom: 1px solid darkgrey"><strong>
-                {{blogs?.user.firstName}}</strong>
-        </h4>
-        <div class="d-flex justify-content-center align-items-center st_info_icon">
-            <a href="">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="">
-                <i class="fa-brands fa-facebook"></i>
-            </a>
-        </div>
-    </div>
-
-    <!-- Modal IMG -->
-    <div class="modal fade" id="exampleModalImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <img *ngIf="selectedImage" [src]="selectedImage.nameImg"
-                    [alt]="selectedImage.nameImg || 'Selected Image'" class="img-fluid" />
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Delete -->
-    <div class="modal fade" id="deleteCmt" tabindex="-1" aria-labelledby="deleteCmtabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title text-center fs-4" id="exampleModalLabel"
-                        style="text-align: center; font-weight: bold;">
-                        Xoá bình luận
-                    </h1>
-                </div>
-                <div class="modal-body">
-                    Bạn có muốn xoá bình luận của chính mình
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" (click)="deleteCmt()" data-bs-dismiss="modal">Xác nhận</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!--Modal Report-->
-    <div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-4 w-100 text-center fw-bold" id="exampleModalLabel">
-                        Báo Cáo
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h4 class="mb-4 text-secondary">
-                        Hãy chọn vấn đề:
-                    </h4>
-                    <form [formGroup]="reportForm" (ngSubmit)="addNewRp()">
-                        <div class="d-flex flex-column gap-3">
-                            <div class="form-check">
-                                <input formControlName="content" name="content"
-                                    value="Bài đăng, bình luận hoặc nội dung khác mà người dùng cho là không phù hợp hoặc gây phản cảm."
-                                    class="form-check-input" type="radio"id="0">
-                                <label class="form-check-label" for="0">
-                                    Bài đăng, bình luận hoặc nội dung khác mà người dùng cho là không phù hợp hoặc gây
-                                    phản cảm.
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input formControlName="content" name="content" value="Nội dung spam, quảng cáo không phù hợp hoặc vi phạm các quy định về quảng cáo trên
-                                diễn đàn." class="form-check-input" type="radio" id="1">
-                                <label class="form-check-label" for="1">
-                                    Nội dung spam, quảng cáo không phù hợp hoặc vi phạm các quy định về quảng cáo trên
-                                    diễn đàn.
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input formControlName="content" name="content" value="Hành vi quấy rối, phân biệt đối xử hoặc gây phiền hà đối với bản thân hoặc thành
-                                viên khác trong cộng đồng." class="form-check-input" type="radio" id="2">
-                                <label class="form-check-label" for="2">
-                                    Hành vi quấy rối, phân biệt đối xử hoặc gây phiền hà đối với bản thân hoặc thành
-                                    viên khác trong cộng đồng.
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input formControlName="content" name="content" value="Bài đăng hoặc thông tin không chính xác, thiếu chính xác hoặc tin giả được chia sẻ
-                                trên diễn đàn." class="form-check-input" type="radio" id="3">
-                                <label class="form-check-label" for="3">
-                                    Bài đăng hoặc thông tin không chính xác, thiếu chính xác hoặc tin giả được chia sẻ
-                                    trên diễn đàn.
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input formControlName="content" name="content" value="Hoạt động hoặc nội dung vi phạm pháp luật, bao gồm vi phạm bản quyền, lạm dụng trẻ
-                                em hoặc nội dung liên quan đến tội phạm." class="form-check-input" type="radio"
-                                 id="4">
-                                <label class="form-check-label" for="4">
-                                    Hoạt động hoặc nội dung vi phạm pháp luật, bao gồm vi phạm bản quyền, lạm dụng trẻ
-                                    em hoặc nội dung liên quan đến tội phạm.
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input formControlName="content" name="content"
-                                    value="Bài đăng hoặc bình luận sử dụng ngôn ngữ không tôn trọng, châm biếm hoặc kích động."
-                                    class="form-check-input" type="radio" id="5">
-                                <label class="form-check-label" for="5">
-                                    Bài đăng hoặc bình luận sử dụng ngôn ngữ không tôn trọng, châm biếm hoặc kích động.
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input formControlName="content" name="content" value="Hành vi lạm dụng tài khoản hoặc gian lận, bao gồm việc sử dụng tài khoản giả mạo
-                                hoặc hack tài khoản." class="form-check-input" type="radio" id="6">
-                                <label class="form-check-label" for="6">
-                                    Hành vi lạm dụng tài khoản hoặc gian lận, bao gồm việc sử dụng tài khoản giả mạo
-                                    hoặc hack tài khoản.
-                                </label>
-                            </div>
+            <div class="main-comment">
+                <h3 style="color: #808080; text-align: center; margin-bottom: 10px">Bình Luận</h3>
+                <div class="main_post_comment">
+                    <form [formGroup]="cmtForm" (ngSubmit)="addNewComment()">
+                        <div class="mb-3">
+                            <textarea formControlName="content" class="form-control" name="comment" rows="3" required
+                                placeholder="Nhập bình luận...">
+                        </textarea>
                         </div>
-                        <div class="modal-footer mt-4">
-                            <button type="submit" class="btn" data-bs-dismiss="modal">Xác
-                                Nhận</button>
-                        </div>
+                        <button type="submit" class="btn submit-button" style="margin: 0;"><i
+                                class="fa-regular fa-message"></i>
+                            Đăng
+                        </button>
                     </form>
                 </div>
+
+                <div *ngFor="let cmt of comments">
+                    <div class="wrap-cmt">
+                        <div class="comment">
+                            <div class="user-info d-flex justify-content-between align-items-center">
+                                <div class="user-details">
+                                    <p class="user-email">{{ cmt.blog.user.firstName }} <span> {{ cmt.blog.user.lastName
+                                            }}</span> </p>
+                                    <p class="comment-time">{{ cmt.date | date: 'short'}}</p>
+                                </div>
+                                <div>
+                                    <i (click)="getId(cmt.id)" class="fa-regular fa-circle-xmark delete-icon"
+                                        type="button" data-bs-toggle="modal" data-bs-target="#deleteCmt"></i>
+                                </div>
+                            </div>
+                            <p class="comment-text">{{ cmt.content }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="main-info-author">
+            <img src="{{blogs?.user.avatar}}" alt="">
+            <h4 style="padding: 10px 40px; border-bottom: 1px solid darkgrey"><strong>
+                    {{blogs?.user.firstName}}</strong>
+            </h4>
+            <div class="d-flex justify-content-center align-items-center st_info_icon">
+                <a href="">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Modal IMG -->
+        <div class="modal fade" id="exampleModalImg" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <img *ngIf="selectedImage" [src]="selectedImage.nameImg"
+                        [alt]="selectedImage.nameImg || 'Selected Image'" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Delete -->
+        <div class="modal fade" id="deleteCmt" tabindex="-1" aria-labelledby="deleteCmtabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title text-center fs-4" id="exampleModalLabel"
+                            style="text-align: center; font-weight: bold;">
+                            Xoá bình luận
+                        </h1>
+                    </div>
+                    <div class="modal-body">
+                        Bạn có muốn xoá bình luận của chính mình
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" (click)="deleteCmt()" data-bs-dismiss="modal">Xác
+                            nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Modal Report-->
+        <div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-4 w-100 text-center fw-bold" id="exampleModalLabel">
+                            Báo Cáo
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="mb-4 text-secondary">
+                            Hãy chọn vấn đề:
+                        </h4>
+                        <form [formGroup]="reportForm" (ngSubmit)="addNewRp()">
+                            <div class="d-flex flex-column gap-3">
+                                <div class="form-check">
+                                    <input formControlName="content" name="content"
+                                        value="Bài đăng, bình luận hoặc nội dung khác mà người dùng cho là không phù hợp hoặc gây phản cảm."
+                                        class="form-check-input" type="radio" id="0">
+                                    <label class="form-check-label" for="0">
+                                        Bài đăng, bình luận hoặc nội dung khác mà người dùng cho là không phù hợp hoặc
+                                        gây
+                                        phản cảm.
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input formControlName="content" name="content" value="Nội dung spam, quảng cáo không phù hợp hoặc vi phạm các quy định về quảng cáo trên
+                                diễn đàn." class="form-check-input" type="radio" id="1">
+                                    <label class="form-check-label" for="1">
+                                        Nội dung spam, quảng cáo không phù hợp hoặc vi phạm các quy định về quảng cáo
+                                        trên
+                                        diễn đàn.
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input formControlName="content" name="content" value="Hành vi quấy rối, phân biệt đối xử hoặc gây phiền hà đối với bản thân hoặc thành
+                                viên khác trong cộng đồng." class="form-check-input" type="radio" id="2">
+                                    <label class="form-check-label" for="2">
+                                        Hành vi quấy rối, phân biệt đối xử hoặc gây phiền hà đối với bản thân hoặc thành
+                                        viên khác trong cộng đồng.
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input formControlName="content" name="content" value="Bài đăng hoặc thông tin không chính xác, thiếu chính xác hoặc tin giả được chia sẻ
+                                trên diễn đàn." class="form-check-input" type="radio" id="3">
+                                    <label class="form-check-label" for="3">
+                                        Bài đăng hoặc thông tin không chính xác, thiếu chính xác hoặc tin giả được chia
+                                        sẻ
+                                        trên diễn đàn.
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input formControlName="content" name="content" value="Hoạt động hoặc nội dung vi phạm pháp luật, bao gồm vi phạm bản quyền, lạm dụng trẻ
+                                em hoặc nội dung liên quan đến tội phạm." class="form-check-input" type="radio" id="4">
+                                    <label class="form-check-label" for="4">
+                                        Hoạt động hoặc nội dung vi phạm pháp luật, bao gồm vi phạm bản quyền, lạm dụng
+                                        trẻ
+                                        em hoặc nội dung liên quan đến tội phạm.
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input formControlName="content" name="content"
+                                        value="Bài đăng hoặc bình luận sử dụng ngôn ngữ không tôn trọng, châm biếm hoặc kích động."
+                                        class="form-check-input" type="radio" id="5">
+                                    <label class="form-check-label" for="5">
+                                        Bài đăng hoặc bình luận sử dụng ngôn ngữ không tôn trọng, châm biếm hoặc kích
+                                        động.
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input formControlName="content" name="content" value="Hành vi lạm dụng tài khoản hoặc gian lận, bao gồm việc sử dụng tài khoản giả mạo
+                                hoặc hack tài khoản." class="form-check-input" type="radio" id="6">
+                                    <label class="form-check-label" for="6">
+                                        Hành vi lạm dụng tài khoản hoặc gian lận, bao gồm việc sử dụng tài khoản giả mạo
+                                        hoặc hack tài khoản.
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer mt-4">
+                                <button type="submit" class="btn" data-bs-dismiss="modal">Xác
+                                    Nhận</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="spinner">
+    <app-loading></app-loading>
 </div>

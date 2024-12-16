@@ -11,6 +11,7 @@ import { UserListComponent } from './admin/user-list/user-list.component';
 import { UserInfoComponent } from './user/user-info/user-info.component';
 import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { ManageReportComponent } from './admin/manage-report/manage-report.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'user-list', component: UserListComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] } },
       { path: 'info-personal', component: UserInfoComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN', 'USER'] } },
       { path: 'manage-categories', component: ManageCategoryComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] } },
+      { path: 'manage-report', component: ManageReportComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] } },
     ]
   }
 ];

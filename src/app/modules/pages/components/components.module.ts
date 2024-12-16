@@ -15,6 +15,7 @@ import { LayoutModule } from '../../shared/layout/layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
+import { ManageReportComponent } from './admin/manage-report/manage-report.component';
 
 
 
@@ -31,6 +32,7 @@ import { ManageCategoryComponent } from './admin/manage-category/manage-category
     UserListComponent,
     BlogPostedComponent,
     ManageCategoryComponent,
+    ManageReportComponent,
   ],
   imports: [
     CommonModule,

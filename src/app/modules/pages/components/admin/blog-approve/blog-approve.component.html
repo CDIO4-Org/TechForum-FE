@@ -16,7 +16,7 @@
 
         <!-- Sort Section -->
         <div class="search-section">
-            <select class="sort-select">
+            <select class="sort-select" class="sort-select" (change)="onFilterChange($event.target.value)">
                 <option value="all">Tất cả</option>
                 <option value="approved">Đã duyệt</option>
                 <option value="pending">Chưa duyệt</option>
@@ -52,7 +52,7 @@
                     </td>
                 </tr>
             </tbody>
-            <tr *ngIf="noRecord">
+            <tr *ngIf="noRecord === 0">
                 <td colspan="19">
                     <h5 style="padding: 20px 10px;" class="text-center validate-msg-color">Không có bài viết nào</h5>
                 </td>

@@ -16,13 +16,15 @@ export class BlogApproveComponent implements OnInit {
   blogs: Blogs[] = []
   currentPage: number = 0;
   totalPages: number = 0;
-  pageSize: number = 8;
+  pageSize: number = 10;
   pages: boolean = false;
   pageRange: number[] = [];
-  noRecord: boolean;
+  noRecord: number;
   blogUpdate: any;
   blogUpdateForm: FormGroup;
   imgs: ImageDto[] = [];
+  filterStatus: string = 'all';
+
 
 
 
@@ -34,8 +36,7 @@ export class BlogApproveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadBlogs(this.currentPage);
-
+    this.applyFilter(this.currentPage)
     this.blogUpdateForm = new FormGroup({
       id: new FormControl(''),
       title: new FormControl(''),
@@ -46,42 +47,74 @@ export class BlogApproveComponent implements OnInit {
       category: new FormControl(''),
     })
 
-    
+  }
+
+  applyFilter(page: number): void {
+    if (this.filterStatus === 'all') {
+      this.blogApproveService.getBlogApprove(page, this.pageSize).subscribe(
+        (response: any) => {
+          this.blogs = response.content;
+          this.currentPage = response.pageable.pageNumber;
+          this.totalPages = response.totalPages;
+          this.pages = this.totalPages > 1;
+          this.countPageCanShow();
+          this.noRecord = this.blogs.length
+        },
+        (error) => console.error('Error loading blogs:', error)
+      );
+    } else if (this.filterStatus === 'approved') {
+      this.blogApproveService.getActive(page, this.pageSize).subscribe(
+        (response: any) => {
+          this.blogs = response.content;
+          this.currentPage = response.pageable.pageNumber;
+          this.totalPages = response.totalPages;
+          this.pages = this.totalPages > 1;
+          this.countPageCanShow();
+          this.noRecord = this.blogs.length
+        },
+        (error) => console.error('Error loading blogs:', error)
+      );
+    } else if (this.filterStatus === 'pending') {
+      this.blogApproveService.getNoneActive(page, this.pageSize).subscribe(
+        (response: any) => {
+          this.blogs = response.content;
+          this.currentPage = response.pageable.pageNumber;
+          this.totalPages = response.totalPages;
+          this.pages = this.totalPages > 1;
+          this.countPageCanShow();
+          this.noRecord = this.blogs.length
+        },
+        (error) => console.error('Error loading blogs:', error)
+      );
+    }
+  }
+
+  onFilterChange(status: string): void {
+    this.filterStatus = status;
+    this.applyFilter(this.currentPage); // Cập nhật danh sách bài viết hiển thị
   }
 
 
-  loadBlogs(page: number): void {
-    this.blogApproveService.getBlogApprove(page, this.pageSize).subscribe(
-      (response: any) => {
-        this.blogs = response.content;
-        this.currentPage = response.pageable.pageNumber;
-        this.totalPages = response.totalPages;
-        this.pages = this.totalPages > 1;
-        this.countPageCanShow()
-      },
-      (error) => console.error('Error loading blogs:', error)
-    );
 
-  }
 
   previousPage(): void {
     if (this.currentPage > 0) {
       this.currentPage--;
-      this.loadBlogs(this.currentPage);
+      this.applyFilter(this.currentPage);
     }
   }
 
   nextPage(): void {
     if (this.currentPage < this.totalPages - 1) {
       this.currentPage++;
-      this.loadBlogs(this.currentPage);
+      this.applyFilter(this.currentPage);
     }
   }
 
   goToPage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.currentPage = page;
-      this.loadBlogs(this.currentPage);
+      this.applyFilter(this.currentPage);
 
     }
   }

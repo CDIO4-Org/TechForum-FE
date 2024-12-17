@@ -12,6 +12,7 @@ import { UserInfoComponent } from './user/user-info/user-info.component';
 import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { ManageReportComponent } from './admin/manage-report/manage-report.component';
+import { SearchCategoriesComponent } from './user/search-categories/search-categories.component';
 
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'info-personal', component: UserInfoComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN', 'USER'] } },
       { path: 'manage-categories', component: ManageCategoryComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] } },
       { path: 'manage-report', component: ManageReportComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] } },
+      { path: 'search-categories/:id', component: SearchCategoriesComponent , canActivate: [AuthGuardService], data: { roles: ['ADMIN', 'USER'] } },
     ]
   }
 ];

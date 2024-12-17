@@ -34,8 +34,22 @@ export class BlogService {
     return this.http.get<Blogs[]>(blogApprove)
   }
 
+  getNoneActive(page: number, pageSize: number): Observable<Blogs[]> {
+    const blogApprove = `${this.API_BLOG}nonActivedBlogs?page=${page}&size=${pageSize}`;
+    return this.http.get<Blogs[]>(blogApprove)
+  }
+
+  getActive(page: number, pageSize: number): Observable<Blogs[]> {
+    const blogApprove = `${this.API_BLOG}activedBlogs?page=${page}&size=${pageSize}`;
+    return this.http.get<Blogs[]>(blogApprove)
+  }
+
   updateApprove(id: any, blog: Blogs): Observable<string> {
     return this.http.put(this.API_BLOG + 'updateBlog?id=' + id, blog, {responseType: 'text'})
+  }
+
+  findByCateId(id: any): Observable<Blogs[]>{
+    return this.http.get<Blogs[]>(this.API_BLOG + 'findByCategoryId/' + id)
   }
 
 

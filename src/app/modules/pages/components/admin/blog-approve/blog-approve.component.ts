@@ -87,6 +87,7 @@ export class BlogApproveComponent implements OnInit {
         (error) => console.error('Error loading blogs:', error)
       );
     }
+
   }
 
   onFilterChange(status: string): void {

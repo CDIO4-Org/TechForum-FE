@@ -13,6 +13,9 @@ import { ImageDto } from 'src/app/models/dto/ImageDto';
 import { Blogs } from 'src/app/models/Blogs';
 import { AccountService } from 'src/app/services/account.service';
 import { UserService } from 'src/app/services/user.service';
+import { da } from 'date-fns/locale';
+import { UserDto } from 'src/app/models/dto/UserDto';
+import { Users } from 'src/app/models/Users';
 
 
 declare var bootstrap: any;
@@ -27,33 +30,7 @@ export class NavigationComponent implements OnInit {
   today: any = Date.now();
   selectedImage: any = null;
   defaultImageUrl = 'https://png.pngtree.com/png-vector/20190719/ourmid/pngtree-no-photo-png-image_1555358.jpg';
-  user: any;
-  userFake = {
-    "id": 3,
-    "avatar": null,
-    "firstName": null,
-    "lastName": null,
-    "email": "baokx2k3@gmail.com",
-    "gender": null,
-    "phoneNumber": null,
-    "birthDate": null,
-    "address": null,
-    "account": {
-      "id": 5,
-      "accountName": "Vovanhoang212",
-      "password": "hashed_password1",
-      "status": true,
-      "roles": [
-        {
-          "id": 1,
-          "roleName": "USER"
-        }
-      ]
-    }
-  }
-
-
-
+  userDto: UserDto;
 
   constructor(
     private accountService: AccountService,
@@ -71,13 +48,13 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    // this.userService;
+    this.getUserByName();
     this.blogForm = new FormGroup({
       title: new FormControl(''),
       beginDate: new FormControl(''),
       content: new FormControl(''),
       status: new FormControl(''),
-      user: new FormControl(this.userFake),
+      user: new FormControl(''),
       category: new FormControl(''),
     })
   }
@@ -146,6 +123,12 @@ export class NavigationComponent implements OnInit {
 
   showPreview(event: any) {
     this.selectedImage = event.target.files;
+  }
+
+  getUserByName(){
+    this.userService.getUser().subscribe(data => {
+      this.blogForm.patchValue({user: data});
+    })
   }
 
   onLogout(){

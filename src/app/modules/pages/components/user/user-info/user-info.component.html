@@ -14,7 +14,7 @@
         <div class="main-post-info">
             <h3 class="main-post-title"><strong>THÔNG TIN CÁ NHÂN</strong></h3>
             <div class="container">
-                <form>
+                <form [formGroup]="userForm" *ngIf="userForm">
                     <div class="row align-items-end">
                         <div class="form-group col-md-4">
                             <div class="avt_img d-flex flex-column">
@@ -26,7 +26,7 @@
                                         </ng-template>
                                       </label>
                                 </div>
-                                <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" class="file-input">
+                                <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" class="file-input" formControlName="avatar">
                             </div>
                         </div>
 
@@ -37,7 +37,7 @@
                             <div class="form-group d-flex justify-content-between">
                                 <div style="width: 30%;">
                                     <label for="userName">Họ:</label>
-                                    <input type="text" class="form-control" id="userName" required>
+                                    <input type="text" class="form-control" formControlName="firstName" >
                                     <span class="d-flex">
                                         <div class="text-danger">
                                             <div class="error-message">
@@ -50,7 +50,7 @@
 
                                 <div style="width: 65%;">
                                     <label for="userName">Tên:</label>
-                                    <input type="text" class="form-control" id="userName" required>
+                                    <input type="text" class="form-control" id="userName" formControlName="lastName" required>
                                     <span class="d-flex">
                                         <div class="text-danger">
                                             <div class="error-message">
@@ -64,7 +64,7 @@
 
                             <div class="form-group">
                                 <label for="name">Email:</label>
-                                <input type="text" class="form-control" id="name" required placeholder="Nhập Email">
+                                <input type="text" class="form-control" id="name" required formControlName="email" placeholder="Nhập Email">
 
                                 <span class="d-flex">
                                     <div class="text-danger">
@@ -79,44 +79,43 @@
                             <div class="form-group">
                                 <label class="form-label" style="margin-right: 20px;">Giới Tính: </label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input " type="radio" name="gender"
+                                    <input class="form-check-input " type="radio" name="gender" 
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="male" value="1">
+                                        id="male" value = 1 formControlName="gender">
                                     <label class="form-check-label" for="male">Nam</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="gender"
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="female" value="2">
+                                        id="female" value = 2 formControlName="gender">
                                     <label class="form-check-label" for="female">Nữ</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="gender"
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="other" value="3">
+                                        id="other" value = 3 formControlName="gender">
                                     <label class="form-check-label" for="other">Khác</label>
                                 </div>
-
                             </div>
                         </div>
 
 
                         <div class="form-group col-md-12">
                             <label for="address">Địa Chỉ:</label>
-                            <input type="text" class="form-control" id="address" required placeholder="Nhập địa chỉ">
+                            <input type="text" class="form-control" id="address" required placeholder="Nhập địa chỉ" formControlName="address">
 
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="birthday">Ngày Sinh:</label>
-                            <input style="height: 50px;" type="date" class="form-control" id="birthday" required>
+                            <input style="height: 50px;" type="date" class="form-control" id="birthday" required formControlName="birthdate">
 
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="phoneNumber">Số Điện Thoại:</label>
                             <input type="text" class="form-control" id="phoneNumber" required
-                                placeholder="Nhập số điện thoại" maxlength="11">
+                                placeholder="Nhập số điện thoại" maxlength="11" formControlName="phoneNumber">
 
                         </div>
 

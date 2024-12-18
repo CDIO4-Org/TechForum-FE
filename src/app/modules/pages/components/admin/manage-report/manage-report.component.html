@@ -1,0 +1,62 @@
+<app-navigation></app-navigation>
+<app-sidebar></app-sidebar>
+
+<div class="Post">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a routerLink="/pages/components/home-main" style="color: #F48023">Trang Chủ</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Quản lý báo cáo</li>
+        </ol>
+    </nav>
+
+    <div class="wrap-post">
+        <h3 style="text-align: center; margin-bottom: 20px; font-weight: bold">QUẢN LÝ BÁO CÁO</h3>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <input type="text" placeholder="Tìm kiếm báo cáo..." class="search-input" />
+            <button class="search-btn">Tìm kiếm</button>
+        </div>
+
+        <!-- Report Table -->
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tiêu đề</th>
+                    <th>Người báo cáo</th>
+                    <th>Ngày báo cáo</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Báo cáo lỗi giao diện</td>
+                    <td>Nguyễn Văn A</td>
+                    <td>2024-12-10</td>
+                    <td>Đang xử lý</td>
+                    <td>
+                        <button class="view-btn">Xem</button>
+                        <button class="delete-btn">Xóa</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Báo cáo tính năng mới</td>
+                    <td>Trần Thị B</td>
+                    <td>2024-12-12</td>
+                    <td>Hoàn thành</td>
+                    <td>
+                        <button class="view-btn">Xem</button>
+                        <button class="delete-btn">Xóa</button>
+                    </td>
+                </tr>
+                <!-- Thêm các dòng dữ liệu khác tại đây -->
+            </tbody>
+        </table>
+    </div>
+</div>

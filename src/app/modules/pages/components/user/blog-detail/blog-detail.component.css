@@ -229,9 +229,9 @@
 
 
 .fa-heart.liked {
-    color: red;
+    color: #ff6200;
 }
 
-.liked {
-    color: red;
+.fa-bookmark.bookmarked{
+    color: #ff6200;
 }

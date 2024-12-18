@@ -1,144 +1,153 @@
-<div class="navigation">
-    <div class="wrap-content-nav">
-        <div class="wrap-icon-text">
-            <div>
-                <img src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
-                    alt="" width="25" height="29">
-            </div>
-            <div>
-                <h2><strong>BDHNP</strong></h2>
-            </div>
-        </div>
-        <div class="wrap-btn">
-            <strong>
-                <a routerLink="/auth/registration"><button class="btn-signup"><strong style="font-weight: bold"><i
-                                class="fa-solid fa-user-plus"></i> ĐĂNG KÝ</strong></button></a>
-            </strong>
+<div *ngIf="!spinner">
 
-            <a routerLink="/auth/login"><button class="btn-login"><strong style="font-weight: bold"> ĐĂNG
-                        NHẬP</strong></button></a>
-
-        </div>
-
-    </div>
-</div>
-
-<div class="Sidebar">
-    <div class="col">
-        <div class="col_item">
-            <h4><strong>MENU</strong></h4>
-        </div>
-
-        <div class="col_item">
-            <div>
-                <i class="fa-solid fa-house col_i"></i>
-                <a routerLink="">Trang Chủ</a>
-            </div>
-            <div>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-        </div>
-
-        <div class="col_item" (click)="toggleDropdown()">
-            <div>
-                <i class="fa-solid fa-tag col_i"></i>
-                <a routerLink="">Chủ Đề</a>
-            </div>
-            <div>
-                <i class="fa-solid fa-angle-down" [ngClass]="{'rotate': isDropdownVisible}"></i>
-            </div>
-        </div>
-        <div class="dropdown-content" *ngIf="!isDropdownVisible">
-            <div class="col_item" *ngFor="let item of cateList">
-                <a routerLink="">
-                    {{item.name}}
-                </a>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="Post">
-    <div class="wrap-post">
-        <div>
-            <form action="">
-                <div class="wrap_btn-search">
-                    <span><i class="fa-solid fa-magnifying-glass"></i></span>
-                    <input class="input_search" type="text" placeholder="Tìm kiếm bài viết ở đây...">
-                </div>
-                <button class="btn_search" type="submit"><strong>Tìm kiếm</strong></button>
-            </form>
-        </div>
-
-
-        <a style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="main-post" *ngFor="let item of blogList">
-                
-                <div class="wrap_main-title">
-                    <h4 style="color: #F48023;">{{item.title}}</h4>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-                <div class="wrap_author">
-                    <div style="padding-right: 20px;">
-                        <img width="30" height="30"
-                            src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
-                            alt="">
-                    </div>
-                    <div>
-                        <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
-                        <div class="d-flex align-items-center">
-                            <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">Trung Bao</p>
-                            <p style="color: grey;">1hour</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div
-                    style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
-                    <p style="color: grey; line-height: 25px;">
-                        {{item.content}}
-                    </p>
+    <div class="navigation">
+        <div class="wrap-content-nav">
+            <div class="wrap-icon-text">
+                <div>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
+                        alt="" width="25" height="29">
                 </div>
                 <div>
-                    <div class="wrap-item-post d-flex justify-content-between align-items-center">
-                        <div class="">
-                            <div>
-                                <p class="st_cate">Cong Nghe</p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center" style="width: 300px">
-                            <div class="icon-number">
-                                <i class="fa-regular fa-heart"></i>
-                                <p>312</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-eye"></i>
-                                <p>321</p>
-                            </div>
-                            <div class="icon-number">
-                                <i class="fa-regular fa-message"></i>
-                                <p>312</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2><strong>BDHNP</strong></h2>
                 </div>
             </div>
-        </a>
+            <div class="wrap-btn">
+                <strong>
+                    <a routerLink="/auth/registration"><button class="btn-signup"><strong style="font-weight: bold"><i
+                                    class="fa-solid fa-user-plus"></i> ĐĂNG KÝ</strong></button></a>
+                </strong>
 
+                <a routerLink="/auth/login"><button class="btn-login"><strong style="font-weight: bold"> ĐĂNG
+                            NHẬP</strong></button></a>
+
+            </div>
+
+        </div>
     </div>
-</div>
 
+    <div class="Sidebar">
+        <div class="col">
+            <div class="col_item">
+                <h4><strong>MENU</strong></h4>
+            </div>
 
-<!-- Modal Post blog-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content ">
-            <div class="modal-body">
-                <b>
-                    <h4 style="text-align: center">CẦN ĐĂNG NHẬP ĐỂ THỰC HIỆN</h4>
-                </b>
+            <div class="col_item">
+                <div>
+                    <i class="fa-solid fa-house col_i"></i>
+                    <a routerLink="">Trang Chủ</a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+
+            <div class="col_item" (click)="toggleDropdown()">
+                <div>
+                    <i class="fa-solid fa-tag col_i"></i>
+                    <a routerLink="">Chủ Đề</a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-angle-down" [ngClass]="{'rotate': isDropdownVisible}"></i>
+                </div>
+            </div>
+            <div class="dropdown-content" *ngIf="!isDropdownVisible">
+                <div class="col_item" *ngFor="let item of cateList">
+                    <a routerLink="">
+                        {{item.name}}
+                    </a>
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="Post">
+        <div class="wrap-post">
+            <div>
+                <form [formGroup]="searchs">
+                    <div class="wrap_btn-search">
+                        <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input formControlName="title" class="input_search" type="text"
+                            placeholder="Tìm kiếm bài viết ở đây...">
+                    </div>
+                </form>
+            </div>
+
+            <div *ngFor="let item of blogList">
+                <a style="cursor: pointer">
+                    <div class="main-post">
+
+                        <div class="wrap_main-title">
+                            <h4 style="color: #F48023;">{{item.title}}</h4>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                        <div class="wrap_author">
+                            <div style="padding-right: 20px;">
+                                <img width="30" height="30" src="{{item.user.avatar}}" alt="">
+                            </div>
+                            <div>
+                                <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
+                                <div class="d-flex align-items-center">
+                                    <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">
+                                        {{item.user.email}}
+                                    </p>
+                                    <p style="color: grey;">{{item.relativeTime}} trước</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div
+                            style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
+                            <p style="color: grey; line-height: 25px;">
+                                {{item.content}}
+                            </p>
+                        </div>
+                        <div>
+                            <div class="wrap-item-post d-flex justify-content-between align-items-center">
+                                <div class="">
+                                    <div>
+                                        <p class="st_cate">{{item.category.name}}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center" style="width: 300px">
+                                    <div class="icon-number">
+                                        <i class="fa-regular fa-heart"></i>
+                                        <p>{{item.likeCount}}</p>
+                                    </div>
+                                    <div class="icon-number">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <p>{{item.viewCount}}</p>
+                                    </div>
+                                    <div class="icon-number">
+                                        <i class="fa-regular fa-message"></i>
+                                        <p>{{item.cmtCount}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Modal Post blog-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content ">
+                <div class="modal-body">
+                    <b>
+                        <h4 style="text-align: center">CẦN ĐĂNG NHẬP ĐỂ THỰC HIỆN</h4>
+                    </b>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="spinner">
+    <app-loading></app-loading>
 </div>

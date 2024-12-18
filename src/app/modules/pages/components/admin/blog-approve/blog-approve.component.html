@@ -1,80 +1,121 @@
 <app-navigation></app-navigation>
 <app-sidebar></app-sidebar>
+
 <div class="Post">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/pages/components/home-main" style="color: #F48023">Trang Chủ</a>
+            <li class="breadcrumb-item">
+                <a routerLink="/pages/components/home-main" style="color: #F48023">Trang Chủ</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Duyệt bài viết</li>
+            <li class="breadcrumb-item active" aria-current="page">Quản lý bài viết</li>
         </ol>
     </nav>
+
     <div class="wrap-post">
-        <h3 style="text-align: center; margin-bottom: 10px; font-weight: bold">DUYỆT BÀI VIẾT</h3>
-        <table>
-            <tr>
-                <th>#</th>
-                <th>Tiêu đề</th>
-                <th>Tác giả</th>
-                <th>Thời gian</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td style="width: 550px"> <a></a>sascascasc</td>
-                <td>ascascasc</td>
-                <td>dasdasd</td>
-                <td>
-                    <button style="margin-bottom: 5px" type="button" class="btn-func" data-toggle="modal"
-                        data-target="#exampleModal2">Duyệt</button>
-                    <button type="button" class="btn-func" data-toggle="modal" data-target="#exampleModal">Xoá</button>
+        <h3 style="text-align: center; margin-bottom: 20px; font-weight: bold">QUẢN LÝ BÀI VIẾT</h3>
+
+        <!-- Sort Section -->
+        <div class="search-section">
+            <select class="sort-select" class="sort-select" (change)="onFilterChange($event.target.value)">
+                <option value="all">Tất cả</option>
+                <option value="approved">Đã duyệt</option>
+                <option value="pending">Chưa duyệt</option>
+            </select>
+        </div>
+
+        <!-- Approval Table -->
+        <table class="approval-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tiêu đề</th>
+                    <th>Tác giả</th>
+                    <th>Thời gian</th>
+                    <th>Trạng thái</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of blogs; index as i">
+                    <td>{{i+1}}</td>
+                    <td class="title-cell">{{item.title}}</td>
+                    <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+                    <td>{{item.beginDate | date: 'short'}}</td>
+                    <td [ngStyle]="{'color': FormatStatusColor(item.status)}">
+                        <strong>{{FormatStatus(item.status)}}</strong>
+                    </td>
+                    <td class="btn-cell">
+                        <button class="btnPost" data-bs-toggle="modal" data-bs-target="#xem"
+                            (click)="getIdBlog(item)">Xem</button>
+                        <button [disabled]="item.status == true" (click)="getIdBlog(item)" class="btnPost" type="button"
+                            data-bs-toggle="modal" data-bs-target="#duyet">Duyệt</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tr *ngIf="noRecord === 0">
+                <td colspan="19">
+                    <h5 style="padding: 20px 10px;" class="text-center validate-msg-color">Không có bài viết nào</h5>
                 </td>
             </tr>
         </table>
+        <div class="pagination" *ngIf="pages">
+            <button class="pagination-btn" (click)="previousPage()" [disabled]="currentPage === 0">Trước</button>
+            <div *ngFor="let page of pageRange">
+                <button class="pagination-btn" [class.active]="page === currentPage" (click)="goToPage(page)">{{ page +
+                    1 }}</button>
+            </div>
+            <button class="pagination-btn" (click)="nextPage()"
+                [disabled]="currentPage === totalPages - 1">Tiếp</button>
+        </div>
     </div>
 </div>
 
-<!--Modal XoaBai Duyet-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form action="/deleteDb" method="get">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><b>XOÁ BÀI</b></h5>
-                    <span aria-hidden="true">&times;</span>
-                </div>
+
+<!-- Modal Duyet -->
+<div class="modal fade" id="duyet" tabindex="-1" aria-labelledby="duyetLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-4" id="xemLabel" style="text-align: center; font-weight: bold;">
+                    DUYỆT BÀI
+                </h1>
+            </div>
+            <form [formGroup]="blogUpdateForm" (ngSubmit)="updateStatus()">
                 <div class="modal-body">
-                    <input hidden name="id" id="id">
-                    <span>Bạn có muốn xoá bài viết của </span><span id="deleteName"></span><span>?</span>
+                    <p>Bạn có muốn duyệt bài viết này không?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn">Xác Nhận</button>
-                    <button type="button" class="btn" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btnPost" data-bs-dismiss="modal">Xác nhận</button>
                 </div>
-            </div>
-        </form>
+            </form>
+
+        </div>
     </div>
 </div>
 
-<!--Modal DuyetBai-->
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form action="/xacNhanDuyetBai" method="get">
-            <div class="modal-content">
+<!-- Modal Xem -->
+<div class="modal fade" id="xem" tabindex="-1" aria-labelledby="xemLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered st_modal">
+        <div class="modal-content st_modal_content">
+            <form [formGroup]="blogUpdateForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2"><b>DUYỆT BÀI</b></h5>
-                    <span aria-hidden="true">&times;</span>
+                    <h5 class="modal-title fs-4" id="xemLabel">
+                        <strong>{{blogUpdateForm.value.title}}</strong>
+                    </h5>
                 </div>
                 <div class="modal-body">
-                    <input hidden name="id" id="idDuyet">
-                    <span>Xác nhận duyệt bài của </span><span id="nameDuyet"></span><span>?</span>
+                    <div class="wrap_img-post">
+                        <div *ngFor="let item of imgs">
+                            <img [src]="item.nameImg" [alt]="item.altText || 'Post Image'" class="post-image" />
+                        </div>
+                    </div>
+                    <div class="wrap_content-post">
+                        <p>
+                            {{blogUpdateForm.value.content}}
+                        </p>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn">Xác Nhận</button>
-                    <button type="button" class="btn" data-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

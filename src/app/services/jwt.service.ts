@@ -1,5 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 const TOKEN_KEY = 'Token_Key';
 const NAME_KEY = 'Name_key';
 const ROLE_KEY = 'Role_Key';
@@ -9,7 +10,7 @@ const DATE = 'Date'
 })
 export class JwtService {
   private roles: Array<string> = [];
-  constructor() { }
+  constructor(private router: Router) { }
   public setToken(token: string){
     localStorage.removeItem('Token_Key');
     localStorage.setItem(TOKEN_KEY, token)
@@ -34,43 +35,6 @@ export class JwtService {
     localStorage.removeItem('Role_Key');
     localStorage.setItem(ROLE_KEY, JSON.stringify(roles));
   }
-  // public getRoles():string[]{
-  //   // this.roles=[];
-  //   // if(localStorage.getItem(TOKEN_KEY)){
-  //   //   JSON.parse(localStorage.getItem(ROLE_KEY)).array.forEach(element => {
-  //   //     this.roles.push(element.authority);
-  //   //   });
-  //   // }
-  //   // return this.roles;
-  //   this.roles = [];
-  //   const rolesData = localStorage.getItem('Role_Key');
-  //   console.log("role data from localStorage: " + rolesData);
-  //   if (rolesData) {
-  //     try {
-  //       const parsedData = JSON.parse(rolesData);
-  //       console.log('Parsed data:', parsedData); // Kiểm tra dữ liệu đã được parse
-  //       if (Array.isArray(parsedData.array)) {
-  //         parsedData.array.forEach((element: any) => {
-  //           if (element && element.authority) {
-  //             this.roles.push(element.authority);
-  //           }
-  //         });
-  //         console.log('Updated roles:', this.roles); // Kiểm tra sau khi cập nhật roles
-  //       } else {
-  //         console.error('Dữ liệu không đúng định dạng array');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error parsing roles data:', error);
-  //     }
-    
-  //     console.log('roles: ', this.roles);
-  //     return this.roles;
-  //   } else {
-  //     console.log('Không tìm thấy dữ liệu trong localStorage');
-  //     return [];
-  //   }
-  // }
-  
   public removeRoles(){
     localStorage.removeItem('Role_Key');
   }
@@ -99,11 +63,13 @@ export class JwtService {
         this.removeRoles();
         this.removeName();
         this.removeDate();
+        // this.router.navigateByUrl("/auth/login")
       } else {
         console.log('token con hieu luc');
       }
     } else {
       result = false;
+      // this.router.navigateByUrl("/auth/login")
     }
     return result;
   }

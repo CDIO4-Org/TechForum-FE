@@ -2,22 +2,11 @@
 
     <app-navigation></app-navigation>
     <app-sidebar></app-sidebar>
-
     <div class="Post">
         <div class="wrap-post">
-            <div>
-                <form [formGroup]="searchs">
-                    <div class="wrap_btn-search">
-                        <span><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input formControlName="title" class="input_search" type="text"
-                            placeholder="Tìm kiếm bài viết ở đây...">
-                    </div>
-                </form>
-            </div>
 
             <div *ngFor="let item of blogList">
-                <a style="cursor: pointer" routerLink="/pages/components/blog-detail/{{item.id}}"
-                    (click)="toogleView(item.id)">
+                <a style="cursor: pointer" (click)="toogleView(item.id)">
                     <div class="main-post">
 
                         <div class="wrap_main-title">

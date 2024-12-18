@@ -20,15 +20,16 @@
         <div class="col_item" (click)="toggleDropdown()">
             <div>
                 <i class="fa-solid fa-tag col_i"></i>
-                <a routerLink="">Chủ Đề</a>
+                <a>Chủ Đề ({{sizeCate}})</a>
             </div>
             <div>
                 <i class="fa-solid fa-angle-down" [ngClass]="{'rotate': isDropdownVisible}"></i>
             </div>
         </div>
         <div class="dropdown-content" *ngIf="!isDropdownVisible">
-            <div class="col_item" *ngFor="let item of cateList">
-                <a routerLink="">
+            <div class="col_item" *ngFor="let item of cateList"
+                routerLink="/pages/components/search-categories/{{item.id}}">
+                <a>
                     {{item.name}}
                 </a>
                 <i class="fa-solid fa-angle-right"></i>
@@ -64,10 +65,13 @@
         </div>
         <div class="dropdown-content" *ngIf="!isDropdownVisible3">
             <div class="col_item">
-                <a routerLink="/pages/components/user-list">Danh Sách Người Dùng</a>
+                <a routerLink="/pages/components/user-list">Quản Lý Tài Khoản </a>
             </div>
             <div class="col_item">
                 <a routerLink="/pages/components/blog-approve">Quản Lý Bài Viết </a>
+            </div>
+            <div class="col_item">
+                <a routerLink="/pages/components/manage-report">Quản Lý Báo Cáo </a>
             </div>
             <div class="col_item">
                 <a routerLink="/pages/components/manage-categories">Quản Lý Chủ Đề </a>

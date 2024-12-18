@@ -1,1 +1,57 @@
-<p>user-list works!</p>
+<app-navigation></app-navigation>
+<app-sidebar></app-sidebar>
+
+<div class="Post">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a routerLink="/pages/components/home-main" style="color: #F48023">Trang Chủ</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Quản lý tài khoản</li>
+        </ol>
+    </nav>
+
+    <div class="wrap-post">
+        <h3 style="text-align: center; margin-bottom: 20px; font-weight: bold">QUẢN LÝ TÀI KHOẢN</h3>
+
+        <!-- Approval Table -->
+        <table class="approval-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tiêu đề</th>
+                    <th>Tác giả</th>
+                    <th>Thời gian</th>
+                    <th>Trạng thái</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr >
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                    <td class="btn-cell">
+                       
+                    </td>
+                </tr>
+            </tbody>
+            <!-- <tr *ngIf="noRecord === 0">
+                <td colspan="19">
+                    <h5 style="padding: 20px 10px;" class="text-center validate-msg-color">Không có bài viết nào</h5>
+                </td>
+            </tr> -->
+        </table>
+        <div class="pagination">
+            <button class="pagination-btn">Trước</button>
+            <div>
+                <button class="pagination-btn">
+                    1
+                </button>
+            </div>
+            <button class="pagination-btn">Tiếp</button>
+        </div>
+    </div>
+</div>

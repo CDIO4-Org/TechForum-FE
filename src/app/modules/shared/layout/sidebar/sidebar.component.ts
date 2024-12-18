@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
   isDropdownVisible = true;
   isDropdownVisible2 = true;
   isDropdownVisible3 = true;
+  sizeCate: any
 
   cateList: Categories[] = [];
   
@@ -38,6 +39,7 @@ export class SidebarComponent implements OnInit {
   GetCate(){
     this.cateService.findAll().subscribe((data: any) =>{
       this.cateList = data;
+      this.sizeCate = this.cateList.length;
     })
   }
 

@@ -21,109 +21,116 @@
     padding-left: 0 !important;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.search-section {
+    display: flex;
+    justify-content: flex-end;
     margin-bottom: 20px;
 }
 
-th, td {
-    padding: 10px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-button.btn-func {
-    padding: 6px 12px;
-    margin-right: 5px;
-    border: none;
+.sort-select {
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button.btn-func:hover {
-    background-color: #ddd;
-}
-
-button[data-target="#exampleModal2"] {
-    background-color: #5cb85c;
-    color: white;
-}
-
-button[data-target="#exampleModal"] {
-    background-color: #d9534f;
-    color: white;
-}
-
-
-.wrap-btn {
-    position: relative;
-    width: 250px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-.avt_func div img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.wrap-drop-personal {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 70%;
-    background-color: white;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
     width: 200px;
 }
 
-.wrap-drop-personal a {
-    color: black;
-    border-left: 4px solid white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+.approval-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.wrap-drop-personal a:hover {
-    background-color: #FCF4EC;
-    border-left: 4px solid #F48023;
-    color: #F48023;
+.approval-table th, .approval-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
-.avt_func:hover .wrap-drop-personal {
-    display: block;
+.approval-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
 }
 
-.wrap-btn button {
-    padding: 10px 20px;
-    border-radius: 5px;
+.title-cell {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-cell{
+    display: flex;
+    justify-content: space-around;
+}
+
+.btnPost {
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    background-color: #F48023 !important;
+    color: white !important;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.pagination-btn.active {
     background-color: #F48023;
     color: white;
+    border-color: #F48023;
+}
+
+.pagination-btn:hover:not(.active):not([disabled]) {
+    background-color: #eaeaea;
+}
+
+.pagination-btn[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+.wrap_img-post {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .wrap_img-post {
+        grid-template-columns: 1fr;
+    }
+}
+
+.wrap_content-post {
+    width: 100%;
+    height: auto;
+}
+
+.wrap_content-post p {
+    line-height: 30px;
 }
 
 .st_modal {
@@ -132,7 +139,7 @@ button[data-target="#exampleModal"] {
 }
 
 .st_modal_content {
-    height: 80vh;
+    height: auto;
 }
 
 @media (max-width: 768px) {
@@ -144,19 +151,4 @@ button[data-target="#exampleModal"] {
     .st_modal_content {
         height: auto;
     }
-}
-
-.btn{
-    padding: 10px 20px !important;
-    border-radius: 5px !important;
-    background-color: #F48023 !important;
-    color: white !important;
-}
-
-.btn-func{
-    padding: 10px 20px !important;
-    border-radius: 5px !important;
-    background-color: #F48023 !important;
-    color: white !important;
-    width: 82px;
 }

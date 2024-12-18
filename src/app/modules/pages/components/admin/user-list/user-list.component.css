@@ -1,0 +1,154 @@
+.Post {
+    width: 100%;
+    height: auto;
+    background-color: rgb(250, 250, 250);
+}
+
+.wrap-post {
+    width: 1100px;
+    padding: 20px;
+    height: auto;
+    margin: 0px 100px 100px 450px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.breadcrumb{
+    width: 1100px;
+    padding: 20px;
+    margin: 114px 100px 20px 450px;
+    padding-left: 0 !important;
+}
+
+.search-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.sort-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.approval-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.approval-table th, .approval-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.approval-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.title-cell {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-cell{
+    display: flex;
+    justify-content: space-around;
+}
+
+.btnPost {
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    background-color: #F48023 !important;
+    color: white !important;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.pagination-btn.active {
+    background-color: #F48023;
+    color: white;
+    border-color: #F48023;
+}
+
+.pagination-btn:hover:not(.active):not([disabled]) {
+    background-color: #eaeaea;
+}
+
+.pagination-btn[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+.wrap_img-post {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .wrap_img-post {
+        grid-template-columns: 1fr;
+    }
+}
+
+.wrap_content-post {
+    width: 100%;
+    height: auto;
+}
+
+.wrap_content-post p {
+    line-height: 30px;
+}
+
+.st_modal {
+    max-width: 80%;
+    width: 80%;
+}
+
+.st_modal_content {
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .st_modal {
+        max-width: 90%;
+        width: 90%;
+    }
+
+    .st_modal_content {
+        height: auto;
+    }
+}

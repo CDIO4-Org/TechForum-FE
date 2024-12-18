@@ -1,8 +1,8 @@
-import { Account } from "./Account";
+import { Account } from "../Account";
 
-export interface Users{
+export interface UserDto{
     id?: number;
-    avatar?: string;
+    avaUrl?: string;
     firstName?: string;
     lastName?: string;
     email?: string;
@@ -10,5 +10,5 @@ export interface Users{
     phoneNumber?: string;
     birthDate?: string;
     address?: string;
-    accountId?: number;
+    account?: Account;
 }

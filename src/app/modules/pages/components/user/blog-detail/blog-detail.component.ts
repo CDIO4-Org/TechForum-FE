@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Blogs } from 'src/app/models/Blogs';
 import { Comments } from 'src/app/models/Comments';
 import { ImageDto } from 'src/app/models/dto/ImageDto';
+import { UserDto } from 'src/app/models/dto/UserDto';
 import { BlogStorageService } from 'src/app/services/blog-storage.service';
 import { BlogService } from 'src/app/services/blog.service';
 import { CommentService } from 'src/app/services/comment.service';
@@ -30,41 +31,7 @@ export class BlogDetailComponent implements OnInit {
   bookmarked: boolean = false;
   idDelete: any;
   spinner: boolean = true
-
-
-
-
-
-  userFake = {
-    "id": 3,
-    "avatar": "https://png.pngtree.com/png-vector/20190719/ourmid/pngtree-no-photo-png-image_1555358.jpg",
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john.doe@example.com",
-    "gender": 1,
-    "phoneNumber": "1234567890",
-    "birthDate": "1990-01-01",
-    "address": "123 Main Street",
-    "account": {
-      "id": 1,
-      "accountName": "john_doe",
-      "password": "hashed_password1",
-      "status": true,
-      "roles": [
-        {
-          "id": 2,
-          "roleName": "USER"
-        },
-        {
-          "id": 1,
-          "roleName": "ADMIN"
-        }
-      ]
-    }
-  }
-
-
-
+  userDto: any;
   constructor(
     private blogService: BlogService,
     private imgService: ImageService,
@@ -73,8 +40,8 @@ export class BlogDetailComponent implements OnInit {
     private likeService: LikeService,
     private bookMarkedSer: BlogStorageService,
     private reportService: ReportService,
-    private userService: UserService,
     private toast: ToastrService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -95,12 +62,10 @@ export class BlogDetailComponent implements OnInit {
           this.reportForm.patchValue({
             blog: this.blogs
           })
-
-          this.userService.getUser().subscribe((data: any)=>{
-            console.log(data);
-            this.cmtForm.patchValue({
-              user: data
-            })
+          this.userService.getUser().subscribe(data => {
+            this.cmtForm.patchValue({user : data});
+            this.reportForm.patchValue({user : data});
+            this.userDto = data;
             this.likeService.CheckLiked(this.blogs.id, data.id).subscribe(data => {
               this.liked = data;
             });
@@ -109,8 +74,6 @@ export class BlogDetailComponent implements OnInit {
               this.bookmarked = data;
             });
           })
-          
-
         });
 
         this.imgService.findByIdImgBlog(activeID).subscribe((images: any) => {
@@ -122,10 +85,8 @@ export class BlogDetailComponent implements OnInit {
           console.log(this.comments)
         })
 
-
       }
     });
-
     this.cmtForm = new FormGroup({
       content: new FormControl(''),
       date: new FormControl(''),
@@ -137,9 +98,8 @@ export class BlogDetailComponent implements OnInit {
       content: new FormControl(''),
       date: new FormControl(''),
       blog: new FormControl(''),
-      user: new FormControl(this.userFake)
+      user: new FormControl('')
     })
-
 
   }
 
@@ -159,14 +119,19 @@ export class BlogDetailComponent implements OnInit {
   }
 
   toggleLike(id: number) {
-    this.likeService.ToggleLike(id, this.userFake.id).subscribe(data => {
+    this.userService.getUser().subscribe(data => {
+      this.likeService.ToggleLike(id, data.id).subscribe(data => {
 
+      })
     })
+    
   }
 
   toggleBM(id: number) {
-    this.bookMarkedSer.ToggleBM(id, this.userFake.id).subscribe(data => {
+    this.userService.getUser().subscribe(data => {
+      this.bookMarkedSer.ToggleBM(id, data.id).subscribe(data => {
 
+      })
     })
   }
 
@@ -195,11 +160,12 @@ export class BlogDetailComponent implements OnInit {
     } else {
       this.reportService.addNewReport(this.reportForm.value).subscribe(
         data => {
-          this.toast.success('thanh cong')
+          this.toast.success('Báo cáo thành công');
           this.ngOnInit();
         }
       )
     }
   }
+
 
 }

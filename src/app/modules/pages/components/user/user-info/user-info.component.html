@@ -14,7 +14,7 @@
         <div class="main-post-info">
             <h3 class="main-post-title"><strong>THÔNG TIN CÁ NHÂN</strong></h3>
             <div class="container">
-                <form [formGroup]="userForm" *ngIf="userForm && previewUrl">
+                <form [formGroup]="userForm" *ngIf="userForm" (ngSubmit)="onSubmit()">
                     <div class="row align-items-end">
                         <div class="form-group col-md-4">
                             <div class="avt_img d-flex flex-column">
@@ -79,21 +79,21 @@
                             <div class="form-group">
                                 <label class="form-label" style="margin-right: 20px;">Giới Tính: </label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input " type="radio" name="gender" 
+                                    <input formControlName="gender" class="form-check-input " type="radio" name="gender" 
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="male" value = 1 formControlName="gender">
+                                        id="male" [value] = "1"  >
                                     <label class="form-check-label" for="male">Nam</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender"
+                                    <input formControlName="gender" class="form-check-input" type="radio" name="gender"
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="female" value = 2 formControlName="gender">
+                                        id="female" [value] = "2" >
                                     <label class="form-check-label" for="female">Nữ</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender"
+                                    <input  formControlName="gender" class="form-check-input" type="radio" name="gender"
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="other" value = 3 formControlName="gender">
+                                        id="other" [value] = "3" >
                                     <label class="form-check-label" for="other">Khác</label>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="birthday">Ngày Sinh:</label>
-                            <input style="height: 50px;" type="date" class="form-control" id="birthday" required formControlName="birthdate">
+                            <input style="height: 50px;" type="date" class="form-control" id="birthday" required formControlName="birthDate">
 
                         </div>
 

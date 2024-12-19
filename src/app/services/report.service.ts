@@ -17,4 +17,8 @@ export class ReportService {
   addNewReport(report: Reports): Observable<Reports>{
     return this.http.post<Reports>(this.API_REPORT + 'addNewReports', report)
   }
+
+  getAllBlogReport():Observable<Reports[]>{
+    return this.http.get<Reports[]>(this.API_REPORT + 'getAllReports');
+  }
 }

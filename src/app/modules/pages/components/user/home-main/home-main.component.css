@@ -1,4 +1,3 @@
-
 .Post {
     width: 100%;
     height: auto;
@@ -79,6 +78,10 @@ form {
 
 .wrap_author img {
     border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    width: 30px;
+    height: 30px;
 }
 
 .st_cate {

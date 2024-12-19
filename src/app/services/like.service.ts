@@ -34,4 +34,8 @@ export class LikeService {
   viewLike(blogId: any): Observable<Number>{
     return this.http.get<Number>(this.API_LIKE + '/countLike' + '?blogId=' + blogId)
   }
+
+  getLiked(userId: any): Observable<Likes[]>{
+    return this.http.get<Likes[]>(this.API_LIKE + '/getAll?userId=' + userId)
+  }
 }

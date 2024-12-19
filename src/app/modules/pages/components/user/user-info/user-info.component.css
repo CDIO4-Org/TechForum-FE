@@ -108,6 +108,7 @@ label {
 .avt_img {
     position: relative;
     overflow: hidden;
+    object-fit: cover;
 }
 
 .avt_overlay {

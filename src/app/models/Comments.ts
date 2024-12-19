@@ -5,6 +5,6 @@ export interface Comments{
     id?: number;
     content?: string;
     date?: string;
-    blog_id?: Blogs;
-    user_id?: Users;
+    blog?: Blogs;
+    user?: Users;
 }

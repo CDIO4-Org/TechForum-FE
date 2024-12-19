@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { JwtService } from './jwt.service';
 import { UserDto } from '../models/dto/UserDto';
 import { Users } from '../models/Users';
+import { UserEditDto } from '../models/dto/UserEditDto';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,26 @@ export class UserService {
   getUser(): Observable<UserDto>{
     const userName = this.jwtService.getName();
     return this.httpClient.get<UserDto>(this.URL+"/profile/" + userName);
+  }
+
+  updateUser(id: number, userDto: FormGroup): Observable<UserEditDto>{
+    console.log("service: " + userDto);
+    const formData = new FormData();
+    Object.keys(userDto.controls).forEach(key => {
+      const control = userDto.get(key);
+      if(control?.value instanceof File){
+        console.log(control?.value);
+        formData.append(key, control.value);
+      }else {
+        console.log(control?.value)
+        formData.append(key, control?.value);
+      }
+    })
+    // return this.httpClient.put<UserEditDto>(this.URL+"/profile/update/" + id, formData, {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //   }
+    // });
+    return this.httpClient.put<UserEditDto>(this.URL+"/profile/update/" + id, formData);
   }
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { da } from 'date-fns/locale';
 import { UserDto } from 'src/app/models/dto/UserDto';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-info',
@@ -10,11 +11,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent implements OnInit {
-  previewUrl: string | ArrayBuffer | null = null; // Biến lưu URL ảnh
+  previewUrl: string | ArrayBuffer | null = null;
   userForm: FormGroup;
-  userDto: UserDto;
-  ava: any;
-  constructor(private render: Renderer2, private userService: UserService, private formBuilder: FormBuilder) {
+  userDto: UserDto = null;
+  constructor(private render: Renderer2, private userService: UserService, private formBuilder: FormBuilder, private toast: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -26,33 +26,39 @@ export class UserInfoComponent implements OnInit {
       this.userDto = data;
       this.previewUrl = data.avaUrl;
       this.userForm = this.formBuilder.group({
+        avatar: [this.previewUrl],
         firstName: [this.userDto.firstName],
         lastName: [this.userDto.lastName],
         email: [this.userDto.email],
-        avatar: [this.userDto.avaUrl],
         gender: [this.userDto.gender],
-        address: [this.userDto.address],
-        birthdate: [this.userDto.birthDate],
-        phoneNumber: [this.userDto.phoneNumber]
+        phoneNumber: [this.userDto.phoneNumber],
+        birthDate: [this.userDto.birthDate],
+        address: [this.userDto.address]
       })
-      console.log("gender: " + this.userForm.value.gender);
+      console.log("before: " + this.previewUrl);
+      console.log("userDto: " + this.userDto);
     })
-
+    
   }
 
 
   onFileSelected(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0]; // Lấy file được chọn
+    const file = (event.target as HTMLInputElement).files?.[0]; 
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         this.previewUrl = reader.result; // Cập nhật URL ảnh xem trước
+        this.userForm.patchValue({avatar: file});
+        console.log("after select: " + this.previewUrl);
       };
       reader.readAsDataURL(file); // Đọc file
     }
   }
 
   onSubmit(){
-    
+    this.userService.updateUser(this.userDto.id, this.userForm).subscribe(next => {
+      this.toast.success('Cập nhật thông tin cá nhân thành công');
+      this.ngOnInit();
+    })
   }
 }

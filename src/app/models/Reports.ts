@@ -5,6 +5,6 @@ export interface Reports{
     id?: number;
     content?: string;
     reportDate?: string;
-    user_id?: Users;
-    blog_id?: Blogs;
+    user?: Users;
+    blog?: Blogs;
 }

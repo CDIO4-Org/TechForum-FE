@@ -33,29 +33,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Báo cáo lỗi giao diện</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>2024-12-10</td>
-                    <td>Đang xử lý</td>
+                <tr *ngFor="let item of reports">
+                    <td>{{item.id}}</td>
+                    <td>{{item.content}}</td>
+                    <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+                    <td>{{item.reportDate}}</td>
+                    <td>{{item.content}}</td>
                     <td>
                         <button class="view-btn">Xem</button>
                         <button class="delete-btn">Xóa</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Báo cáo tính năng mới</td>
-                    <td>Trần Thị B</td>
-                    <td>2024-12-12</td>
-                    <td>Hoàn thành</td>
-                    <td>
-                        <button class="view-btn">Xem</button>
-                        <button class="delete-btn">Xóa</button>
-                    </td>
-                </tr>
-                <!-- Thêm các dòng dữ liệu khác tại đây -->
             </tbody>
         </table>
     </div>

@@ -14,7 +14,7 @@
         <div class="main-post-info">
             <h3 class="main-post-title"><strong>THÔNG TIN CÁ NHÂN</strong></h3>
             <div class="container">
-                <form [formGroup]="userForm" *ngIf="userForm">
+                <form [formGroup]="userForm" *ngIf="userForm && previewUrl">
                     <div class="row align-items-end">
                         <div class="form-group col-md-4">
                             <div class="avt_img d-flex flex-column">

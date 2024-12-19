@@ -128,6 +128,7 @@ export class NavigationComponent implements OnInit {
 
   getUserByName(){
     this.userService.getUser().subscribe(data => {
+      this.userDto = data
       this.blogForm.patchValue({user: data});
     })
   }

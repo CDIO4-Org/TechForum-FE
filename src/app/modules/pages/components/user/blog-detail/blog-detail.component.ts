@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { da, id } from 'date-fns/locale';
 import { ToastrService } from 'ngx-toastr';
 import { Blogs } from 'src/app/models/Blogs';
+import { Comments } from 'src/app/models/Comments';
 import { ImageDto } from 'src/app/models/dto/ImageDto';
 import { BlogStorageService } from 'src/app/services/blog-storage.service';
 import { BlogService } from 'src/app/services/blog.service';
@@ -11,6 +12,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { ImageService } from 'src/app/services/image.service';
 import { LikeService } from 'src/app/services/like.service';
 import { ReportService } from 'src/app/services/report.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -20,7 +22,7 @@ import { ReportService } from 'src/app/services/report.service';
 export class BlogDetailComponent implements OnInit {
   blogs: Blogs;
   imgs: ImageDto[] = [];
-  comments: Comment[] = [];
+  comments: Comments[] = [];
   cmtForm: FormGroup;
   reportForm: FormGroup;
   selectedImage: ImageDto | null = null;
@@ -71,11 +73,12 @@ export class BlogDetailComponent implements OnInit {
     private likeService: LikeService,
     private bookMarkedSer: BlogStorageService,
     private reportService: ReportService,
+    private userService: UserService,
     private toast: ToastrService,
   ) { }
 
   ngOnInit(): void {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.spinner = false;
     }, 750)
     this.checkBM();
@@ -93,13 +96,20 @@ export class BlogDetailComponent implements OnInit {
             blog: this.blogs
           })
 
-          this.likeService.CheckLiked(this.blogs.id, this.userFake.id).subscribe(data => {
-            this.liked = data;
-          });
-
-          this.bookMarkedSer.CheckBookMarked(this.blogs.id, this.userFake.id).subscribe(data => {
-            this.bookmarked = data;
-          });
+          this.userService.getUser().subscribe((data: any)=>{
+            console.log(data);
+            this.cmtForm.patchValue({
+              user: data
+            })
+            this.likeService.CheckLiked(this.blogs.id, data.id).subscribe(data => {
+              this.liked = data;
+            });
+  
+            this.bookMarkedSer.CheckBookMarked(this.blogs.id, data.id).subscribe(data => {
+              this.bookmarked = data;
+            });
+          })
+          
 
         });
 
@@ -107,8 +117,9 @@ export class BlogDetailComponent implements OnInit {
           this.imgs = images;
         });
 
-        this.commentService.GetCmtById(activeID).subscribe(data => {
+        this.commentService.GetCmtById(activeID).subscribe((data: any) => {
           this.comments = data;
+          console.log(this.comments)
         })
 
 
@@ -119,7 +130,7 @@ export class BlogDetailComponent implements OnInit {
       content: new FormControl(''),
       date: new FormControl(''),
       blog: new FormControl(''),
-      user: new FormControl(this.userFake)
+      user: new FormControl('')
     })
 
     this.reportForm = new FormGroup({

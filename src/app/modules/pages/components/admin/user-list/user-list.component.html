@@ -14,27 +14,49 @@
     <div class="wrap-post">
         <h3 style="text-align: center; margin-bottom: 20px; font-weight: bold">QUẢN LÝ TÀI KHOẢN</h3>
 
-        <!-- Approval Table -->
         <table class="approval-table">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Tiêu đề</th>
-                    <th>Tác giả</th>
-                    <th>Thời gian</th>
+                    <th>Tên tài khoản</th>
+                    <th>Vai trò</th>
                     <th>Trạng thái</th>
                     <th>Chức năng</th>
                 </tr>
             </thead>
             <tbody>
-                <tr >
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
-                    <td class="btn-cell">
-                       
+                <tr *ngFor="let item of accList, index as i">
+                    <td>{{i + 1}}</td>
+                    <td>{{item.accountName}}</td>
+                    <td>
+                        <ng-container *ngIf="item.roles && item.roles.length > 0">
+                            {{ item.roles[0].roleName }}
+                        </ng-container>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <p [ngStyle]="{'color': FormatStatusColor(item.status)}">
+                                <strong>{{FormatStatus(item.status)}}</strong>
+                            </p>
+                            <div [hidden]="item.id != idDisabled">
+                                <span style="margin-left: 10px;" *ngIf="isLoading"
+                                    class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td>
+                        <ng-container *ngIf="item.roles && item.roles.length > 0">
+                            <div class="btn-cell" [hidden]="item.roles[0].roleName == 'ADMIN'">
+                                <button (click)="disable(item.id, item.accountName)" [disabled]="item.status == true"
+                                    class="btnPost" data-bs-toggle="modal" data-bs-target="#disable">Vô hiệu
+                                    hoá</button>
+
+                                <button (click)="enable(item.id, item.accountName)" [disabled]="item.status == false"
+                                    class="btnPost" data-bs-toggle="modal" data-bs-target="#enable">Kích hoạt</button>
+                            </div>
+                        </ng-container>
+
                     </td>
                 </tr>
             </tbody>
@@ -52,6 +74,50 @@
                 </button>
             </div>
             <button class="pagination-btn">Tiếp</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal disable -->
+<div class="modal fade" id="disable" tabindex="-1" aria-labelledby="disableLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-4" id="xemLabel" style="text-align: center; font-weight: bold;">
+                    Vô hiệu hoá tài khoản
+                </h1>
+            </div>
+            <form [formGroup]="disableForm" (ngSubmit)="updateStatusDisable()">
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn với lựa chọn này</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btnPost" data-bs-dismiss="modal">Xác nhận</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal enable -->
+<div class="modal fade" id="enable" tabindex="-1" aria-labelledby="enableLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-4" id="xemLabel" style="text-align: center; font-weight: bold;">
+                    Vô hiệu hoá tài khoản
+                </h1>
+            </div>
+            <form [formGroup]="enableForm" (ngSubmit)="updateStatusEnable()">
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn với lựa chọn này</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btnPost" data-bs-dismiss="modal">Xác nhận</button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>

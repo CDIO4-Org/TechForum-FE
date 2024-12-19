@@ -1,10 +1,13 @@
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginForm } from '../models/dto/LoginForm';
 import { JwtResponse } from '../models/dto/JwtRespone';
 import { JwtService } from './jwt.service';
 import { Router } from '@angular/router';
+import { Account } from '../models/Account';
+import { AccountListDto } from '../models/dto/AccountListDto';
+import { AccountEditDto } from '../models/dto/AccountEditDto';
 
 
 @Injectable({
@@ -12,9 +15,9 @@ import { Router } from '@angular/router';
 })
 export class AccountService {
   private URL = "http://localhost:8080/api/auth";
-  
+
   private httpOptions: any;
-  constructor(private httpClient: HttpClient, private jwtService: JwtService, private router: Router) { 
+  constructor(private httpClient: HttpClient, private jwtService: JwtService, private router: Router) {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -24,19 +27,28 @@ export class AccountService {
     };
   }
 
-  register(account: any): Observable<any>{
+  register(account: any): Observable<any> {
     return this.httpClient.post<any>(this.URL + "/account/register", account, this.httpOptions);
   }
 
-  login(formLogin: LoginForm): Observable<JwtResponse>{
-    return this.httpClient.post<JwtResponse>(this.URL+"/account/login", formLogin);
+  login(formLogin: LoginForm): Observable<JwtResponse> {
+    return this.httpClient.post<JwtResponse>(this.URL + "/account/login", formLogin);
   }
 
-  logout(){
+  logout() {
     this.jwtService.removeDate();
     this.jwtService.removeName();
     this.jwtService.removeRoles();
     this.jwtService.removeToken();
     this.router.navigateByUrl("/auth/login");
+  }
+
+  getAccList(page: number, pageSize: number): Observable<AccountListDto[]> {
+    const accListUrl = `${this.URL}/admin/getAllAccount?page=${page}&size=${pageSize}`;
+    return this.httpClient.get<AccountListDto[]>(accListUrl)
+  }
+
+  editStatus(id: number, status: AccountEditDto): Observable<AccountEditDto> {
+    return this.httpClient.put<AccountEditDto>(this.URL + "/admin/updateSatusAccount/" + id, status)
   }
 }

@@ -44,11 +44,13 @@
                     <td [ngStyle]="{'color': FormatStatusColor(item.status)}">
                         <strong>{{FormatStatus(item.status)}}</strong>
                     </td>
-                    <td class="btn-cell">
-                        <button class="btnPost" data-bs-toggle="modal" data-bs-target="#xem"
-                            (click)="getIdBlog(item)">Xem</button>
-                        <button [disabled]="item.status == true" (click)="getIdBlog(item)" class="btnPost" type="button"
-                            data-bs-toggle="modal" data-bs-target="#duyet">Duyệt</button>
+                    <td>
+                        <div class="btn-cell">
+                            <button class="btnPost" data-bs-toggle="modal" data-bs-target="#xem"
+                                (click)="getIdBlog(item)">Xem</button>
+                            <button [disabled]="item.status == true" (click)="getIdBlog(item)" class="btnPost"
+                                type="button" data-bs-toggle="modal" data-bs-target="#duyet">Duyệt</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

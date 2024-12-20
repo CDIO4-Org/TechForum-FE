@@ -48,6 +48,16 @@ export class AccountService {
     return this.httpClient.get<AccountListDto[]>(accListUrl)
   }
 
+  getListActive(page: number, pageSize: number): Observable<AccountListDto[]> {
+    const accListUrl = `${this.URL}/admin/getListStatusActive?page=${page}&size=${pageSize}`;
+    return this.httpClient.get<AccountListDto[]>(accListUrl)
+  }
+
+  getListNonActive(page: number, pageSize: number): Observable<AccountListDto[]> {
+    const accListUrl = `${this.URL}/admin/getListStatusNonActive?page=${page}&size=${pageSize}`;
+    return this.httpClient.get<AccountListDto[]>(accListUrl)
+  }
+
   editStatus(id: number, status: AccountEditDto): Observable<AccountEditDto> {
     return this.httpClient.put<AccountEditDto>(this.URL + "/admin/updateSatusAccount/" + id, status)
   }

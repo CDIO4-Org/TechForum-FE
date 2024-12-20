@@ -11,15 +11,22 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class UserListComponent implements OnInit {
   accList: AccountListDto[] = [];
-  page: number = 0;
-  pageSize: number = 10;
   disableForm: FormGroup;
   enableForm: FormGroup;
   idDisabled: number;
   accName: string;
   isLoading = false;
+  filterStatus: string = 'all';
+
 
   pages: boolean = false;
+  pageSize: number = 10;
+  currentPage: number = 0;
+  totalPages: number = 0;
+  noRecord: number;
+  pageRange: number[] = [];
+
+
 
 
 
@@ -28,10 +35,8 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accService.getAccList(this.page, this.pageSize).subscribe((data: any) => {
-      this.accList = data.content
 
-    })
+    this.applyFilter(this.currentPage)
 
     this.disableForm = new FormGroup({
       id: new FormControl(''),
@@ -44,6 +49,80 @@ export class UserListComponent implements OnInit {
       status: new FormControl(false),
       accountName: new FormControl('')
     })
+  }
+
+  applyFilter(page: number): void {
+    if (this.filterStatus === 'all') {
+      this.accService.getAccList(page, this.pageSize).subscribe(
+        (data: any) => {
+          this.accList = data.content
+          this.currentPage = data.pageable.pageNumber;
+          this.totalPages = data.totalPages;
+          this.pages = this.totalPages > 1;
+          this.countPageCanShow();
+          this.noRecord = this.accList.length
+        },
+        (error) => console.error('Error loading account:', error)
+      );
+    }
+    else if (this.filterStatus === 'active') {
+      this.accService.getListActive(page, this.pageSize).subscribe(
+        (data: any) => {
+          this.accList = data.content
+          this.currentPage = data.pageable.pageNumber;
+          this.totalPages = data.totalPages;
+          this.pages = this.totalPages > 1;
+          this.countPageCanShow();
+          this.noRecord = this.accList.length
+        },
+        (error) => console.error('Error loading account:', error)
+      );
+    }
+    else if (this.filterStatus === 'nonactive') {
+      this.accService.getListNonActive(page, this.pageSize).subscribe(
+        (data: any) => {
+          this.accList = data.content
+          this.currentPage = data.pageable.pageNumber;
+          this.totalPages = data.totalPages;
+          this.pages = this.totalPages > 1;
+          this.countPageCanShow();
+          this.noRecord = this.accList.length
+        },
+        (error) => console.error('Error loading account:', error)
+      );
+    }
+  }
+  onFilterChange(status: string): void {
+    this.filterStatus = status;
+    this.applyFilter(this.currentPage); // Cập nhật danh sách bài viết hiển thị
+  }
+
+  countPageCanShow() {
+    const rangeStart = Math.max(0, this.currentPage - 2);
+    const rangeEnd = Math.min(this.totalPages - 1, this.currentPage + 2);
+    this.pageRange = Array(rangeEnd - rangeStart + 1).fill(0).map((x, i) => i + rangeStart);
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.applyFilter(this.currentPage);
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
+      this.applyFilter(this.currentPage);
+    }
+  }
+
+  goToPage(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.applyFilter(this.currentPage);
+
+    }
   }
 
   disable(id, acc) {

@@ -14,14 +14,13 @@
         <div *ngFor="let item of likeList">
             <a style="cursor: pointer" routerLink="/pages/components/blog-detail/{{item.blog.id}}">
                 <div class="main-post">
-
                     <div class="wrap_main-title">
                         <h4 style="color: #F48023;">{{item.blog.title}}</h4>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                     <div class="wrap_author">
                         <div style="padding-right: 20px;">
-                            <img width="30" height="30" src="" alt="">
+                            <img width="30" height="30" src="{{item.blog.user.avatar}}" alt="">
                         </div>
                         <div>
                             <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
@@ -64,7 +63,11 @@
                         </div>
                     </div>
                 </div>
+
             </a>
+        </div>
+        <div class="main-post" *ngIf="noRecord == 0">
+            <h2 style="text-align: center;">Chưa có bài viết nào đã thích</h2>
         </div>
     </div>
 </div>

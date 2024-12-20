@@ -13,7 +13,8 @@ import { ViewService } from 'src/app/services/view.service';
   styleUrls: ['./blog-liked.component.css']
 })
 export class BlogLikedComponent implements OnInit {
-  likeList: Likes[] = []
+  likeList: Likes[] = [];
+  noRecord: number;
 
   constructor(
     private likeService: LikeService,
@@ -31,8 +32,6 @@ export class BlogLikedComponent implements OnInit {
     try {
       const user: any = await this.userService.getUser().toPromise();
       const data: any = await this.likeService.getLiked(user.id).toPromise();
-      console.log(data)
-
       // Duyệt qua mỗi bài viết và thêm tổng số lượt like
       const updateLike = await Promise.all(data.map(async (like) => {
         // Tính toán thời gian tương đối
@@ -55,6 +54,7 @@ export class BlogLikedComponent implements OnInit {
 
       // Cập nhật danh sách blog với thông tin mới
       this.likeList = updateLike;
+      this.noRecord = data.length
 
     } catch (error) {
       console.error('Error fetching data', error);

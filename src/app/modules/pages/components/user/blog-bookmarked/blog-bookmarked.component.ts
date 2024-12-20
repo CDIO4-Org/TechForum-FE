@@ -14,7 +14,8 @@ import { vi } from 'date-fns/locale';
   styleUrls: ['./blog-bookmarked.component.css']
 })
 export class BlogBookmarkedComponent implements OnInit {
-  bookMList: BlogStorage[] = []
+  bookMList: BlogStorage[] = [];
+  noRecord: number;
 
   constructor(
     private blogStorageService: BlogStorageService,
@@ -33,7 +34,6 @@ export class BlogBookmarkedComponent implements OnInit {
     try {
       const user: any = await this.userService.getUser().toPromise();
       const data: any = await this.blogStorageService.getBookmarked(user.id).toPromise();
-      console.log(data)
 
       // Duyệt qua mỗi bài viết và thêm tổng số lượt like
       const updateLike = await Promise.all(data.map(async (like) => {
@@ -57,6 +57,7 @@ export class BlogBookmarkedComponent implements OnInit {
 
       // Cập nhật danh sách blog với thông tin mới
       this.bookMList = updateLike;
+      this.noRecord = data.length
 
     } catch (error) {
       console.error('Error fetching data', error);

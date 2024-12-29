@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (err) => {
-          this.errorMessage = 'Đăng nhập không thành công!';
           if (err.error?.message) {
             this.errorMessage = err.error.message;
           }

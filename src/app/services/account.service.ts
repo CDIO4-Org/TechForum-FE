@@ -5,6 +5,7 @@ import { LoginForm } from '../models/dto/LoginForm';
 import { JwtResponse } from '../models/dto/JwtRespone';
 import { JwtService } from './jwt.service';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -25,11 +26,21 @@ export class AccountService {
   }
 
   register(account: any): Observable<any>{
-    return this.httpClient.post<any>(this.URL + "/account/register", account, this.httpOptions);
+    return this.httpClient.post<any>(`${this.URL}/account/register`, account, this.httpOptions).pipe(
+      catchError((error) => {
+        console.error('Error caught in service:', error);
+        throw error;
+      })
+    );
   }
 
   login(formLogin: LoginForm): Observable<JwtResponse>{
-    return this.httpClient.post<JwtResponse>(this.URL+"/account/login", formLogin);
+    return this.httpClient.post<JwtResponse>(this.URL+"/account/login", formLogin).pipe(
+      catchError((error) => {
+        console.error('Error caught in service:', error);
+        throw error;
+      })
+    );
   }
 
   logout(){
@@ -40,3 +51,4 @@ export class AccountService {
     this.router.navigateByUrl("/auth/login");
   }
 }
+

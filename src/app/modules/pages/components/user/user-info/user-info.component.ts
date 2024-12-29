@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UserInfoComponent implements OnInit {
   previewUrl: string | ArrayBuffer | null = null;
   userForm: FormGroup;
+  userFormReplace: FormGroup;
+  chooseAva: boolean = false;
   userDto: UserDto = null;
   constructor(private render: Renderer2, private userService: UserService, private formBuilder: FormBuilder, private toast: ToastrService) {
   }
@@ -41,8 +43,8 @@ export class UserInfoComponent implements OnInit {
     
   }
 
-
   onFileSelected(event: Event): void {
+    this.chooseAva = true;
     const file = (event.target as HTMLInputElement).files?.[0]; 
     if (file) {
       const reader = new FileReader();
@@ -54,11 +56,29 @@ export class UserInfoComponent implements OnInit {
       reader.readAsDataURL(file); // Đọc file
     }
   }
+  
+  
 
   onSubmit(){
-    this.userService.updateUser(this.userDto.id, this.userForm).subscribe(next => {
-      this.toast.success('Cập nhật thông tin cá nhân thành công');
-      this.ngOnInit();
-    })
+    if(this.chooseAva == false){
+      this.userFormReplace = this.formBuilder.group({
+        firstName: [this.userForm.value.firstName],
+        lastName: [this.userForm.value.lastName],
+        email: [this.userForm.value.email],
+        gender: [this.userForm.value.gender],
+        phoneNumber: [this.userForm.value.phoneNumber],
+        birthDate: [this.userForm.value.birthDate],
+        address: [this.userForm.value.address]
+      });
+      this.userService.updateUser(this.userDto.id, this.userFormReplace).subscribe(next => {
+        this.toast.success('Cập nhật thông tin cá nhân thành công');
+        this.ngOnInit();
+      })
+    }else {
+      this.userService.updateUser(this.userDto.id, this.userForm).subscribe(next => {
+        this.toast.success('Cập nhật thông tin cá nhân thành công');
+        this.ngOnInit();
+      })
+    }
   }
 }

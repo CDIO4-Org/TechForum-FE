@@ -52,5 +52,9 @@ export class BlogService {
     return this.http.get<Blogs[]>(this.API_BLOG + 'findByCategoryId/' + id)
   }
 
+  getBlogByUser(id: number): Observable<Blogs[]>{
+    return this.http.get<Blogs[]>(this.API_BLOG + 'findByUserId/'+ id)
+  }
+
 
 }

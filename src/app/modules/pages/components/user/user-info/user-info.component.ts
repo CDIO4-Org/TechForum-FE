@@ -14,6 +14,7 @@ export class UserInfoComponent implements OnInit {
   previewUrl: string | ArrayBuffer | null = null;
   userForm: FormGroup;
   userDto: UserDto = null;
+  isLoading: boolean = false;
   constructor(private render: Renderer2, private userService: UserService, private formBuilder: FormBuilder, private toast: ToastrService) {
   }
 
@@ -56,9 +57,12 @@ export class UserInfoComponent implements OnInit {
   }
 
   onSubmit(){
+    this.isLoading = true;
     this.userService.updateUser(this.userDto.id, this.userForm).subscribe(next => {
       this.toast.success('Cập nhật thông tin cá nhân thành công');
       this.ngOnInit();
+      this.isLoading = false;
+
     })
   }
 }

@@ -20,24 +20,26 @@
                             <div class="avt_img d-flex flex-column">
                                 <div class="avt_overlay">
                                     <label for="fileInput" class="upload-label">
-                                        <img id="previewImage" [src]="previewUrl" alt="Preview Image" *ngIf="previewUrl; else placeholder">
+                                        <img id="previewImage" [src]="previewUrl" alt="Preview Image"
+                                            *ngIf="previewUrl; else placeholder">
                                         <ng-template #placeholder>
-                                          <span>Chọn Ảnh</span>
+                                            <span>Chọn Ảnh</span>
                                         </ng-template>
-                                      </label>
+                                    </label>
                                 </div>
-                                <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" class="file-input" formControlName="avatar">
+                                <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*"
+                                    class="file-input" formControlName="avatar">
                             </div>
                         </div>
 
-                            
-                          
+
+
 
                         <div class="form-group col-md-8">
                             <div class="form-group d-flex justify-content-between">
                                 <div style="width: 30%;">
                                     <label for="userName">Họ:</label>
-                                    <input type="text" class="form-control" formControlName="firstName" >
+                                    <input type="text" class="form-control" formControlName="firstName">
                                     <span class="d-flex">
                                         <div class="text-danger">
                                             <div class="error-message">
@@ -50,7 +52,8 @@
 
                                 <div style="width: 65%;">
                                     <label for="userName">Tên:</label>
-                                    <input type="text" class="form-control" id="userName" formControlName="lastName" required>
+                                    <input type="text" class="form-control" id="userName" formControlName="lastName"
+                                        required>
                                     <span class="d-flex">
                                         <div class="text-danger">
                                             <div class="error-message">
@@ -64,7 +67,8 @@
 
                             <div class="form-group">
                                 <label for="name">Email:</label>
-                                <input type="text" class="form-control" id="name" required formControlName="email" placeholder="Nhập Email">
+                                <input type="text" class="form-control" id="name" required formControlName="email"
+                                    placeholder="Nhập Email">
 
                                 <span class="d-flex">
                                     <div class="text-danger">
@@ -79,21 +83,21 @@
                             <div class="form-group">
                                 <label class="form-label" style="margin-right: 20px;">Giới Tính: </label>
                                 <div class="form-check form-check-inline">
-                                    <input formControlName="gender" class="form-check-input " type="radio" name="gender" 
+                                    <input formControlName="gender" class="form-check-input " type="radio" name="gender"
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="male" [value] = "1"  >
+                                        id="male" [value]="1">
                                     <label class="form-check-label" for="male">Nam</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input formControlName="gender" class="form-check-input" type="radio" name="gender"
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="female" [value] = "2" >
+                                        id="female" [value]="2">
                                     <label class="form-check-label" for="female">Nữ</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input  formControlName="gender" class="form-check-input" type="radio" name="gender"
+                                    <input formControlName="gender" class="form-check-input" type="radio" name="gender"
                                         style="height: 20px !important; width: 20px;border-radius: 50% !important;"
-                                        id="other" [value] = "3" >
+                                        id="other" [value]="3">
                                     <label class="form-check-label" for="other">Khác</label>
                                 </div>
                             </div>
@@ -102,13 +106,15 @@
 
                         <div class="form-group col-md-12">
                             <label for="address">Địa Chỉ:</label>
-                            <input type="text" class="form-control" id="address" required placeholder="Nhập địa chỉ" formControlName="address">
+                            <input type="text" class="form-control" id="address" required placeholder="Nhập địa chỉ"
+                                formControlName="address">
 
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="birthday">Ngày Sinh:</label>
-                            <input style="height: 50px;" type="date" class="form-control" id="birthday" required formControlName="birthDate">
+                            <input style="height: 50px;" type="date" class="form-control" id="birthday" required
+                                formControlName="birthDate">
 
                         </div>
 
@@ -123,7 +129,9 @@
 
                     <div class="d-flex justify-content-center">
                         <div class="mr-2">
-                            <button class="btnPost" type="submit">Cập nhập</button>
+                            <button *ngIf="!isLoading" class="btnPost" type="submit">Cập nhập</button>
+                            <span *ngIf="isLoading" class="spinner-border spinner-border-sm"
+                                role="status" aria-hidden="true"></span>
                         </div>
 
                     </div>
@@ -134,65 +142,7 @@
 
 
         <h3 style="text-align: center;font-weight: bold;margin-bottom: 20px; margin-top: 60px;">BÀI VIẾT ĐÃ ĐĂNG</h3>
-        <div>
-            <a style="cursor: pointer">
-                <div class="main-post-wrap">
-
-                    <div class="wrap_main-title">
-                        <h4 style="color: #F48023;">Title</h4>
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </div>
-                    <div class="wrap_author">
-                        <div style="padding-right: 20px;">
-                            <img width="30" height="30"
-                                src="https://png.pngtree.com/png-vector/20190719/ourmid/pngtree-no-photo-png-image_1555358.jpg"
-                                alt="">
-                        </div>
-                        <div>
-                            <p style="font-size: 14px; color: grey; padding-bottom: 5px;">Được tạo bởi</p>
-                            <div class="d-flex align-items-center">
-                                <p style="font-size: 18px; font-weight: 500; padding-right: 5px;">Trung Bao
-                                </p>
-                                <p style="color: grey;">15h trước</p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div
-                        style="overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 25px; color: grey;">
-                        <p style="color: grey; line-height: 25px;">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut nobis dolorem dolores,
-                            voluptate aut eius voluptatibus blanditiis a voluptatum, beatae accusamus est nulla. Quia
-                            architecto, adipisci illum consequuntur distinctio illo?
-                        </p>
-                    </div>
-                    <div>
-                        <div class="wrap-item-post d-flex justify-content-between align-items-center">
-                            <div class="">
-                                <div>
-                                    <p class="st_cate">Cong Nghe</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center" style="width: 300px">
-                                <div class="icon-number">
-                                    <i class="fa-regular fa-heart"></i>
-                                    <p>312</p>
-                                </div>
-                                <div class="icon-number">
-                                    <i class="fa-regular fa-eye"></i>
-                                    <p>321</p>
-                                </div>
-                                <div class="icon-number">
-                                    <i class="fa-regular fa-message"></i>
-                                    <p>312</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </a>
-        </div>
+        <app-blog-posted></app-blog-posted>
 
     </div>
 </div>

@@ -7,4 +7,5 @@ export interface Reports{
     reportDate?: string;
     user?: Users;
     blog?: Blogs;
+    status?: boolean;
 }

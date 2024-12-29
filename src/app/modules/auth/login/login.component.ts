@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/services/account.service';
 import { JwtService } from 'src/app/services/jwt.service';
 
@@ -13,11 +14,11 @@ export class LoginComponent implements OnInit {
   spinner: boolean = true
   showpass: boolean = false;
   formLogin: FormGroup;
-
-  constructor(private accountService: AccountService, private jwtService: JwtService, private router: Router) {
+  errorMessage: any = null;
+  constructor(private accountService: AccountService, private jwtService: JwtService, private router: Router, private toast: ToastrService) {
     this.formLogin = new FormGroup({
-      accountName: new FormControl(),
-      password: new FormControl()
+      accountName: new FormControl('',[Validators.required]),
+      password: new FormControl('', [Validators.required])
     })
    }
 
@@ -28,21 +29,40 @@ export class LoginComponent implements OnInit {
     this.Load();
   }
   
+  validation_messages = {
+    accountName:[
+      { type: 'required', message: 'Vui lòng nhập tên tài khoản.' }
+    ],
+    password:[
+      { type: 'required', message: 'Vui lòng nhập mật khẩu.' }
+    ]
+  }
 
   viewpassword() {
     this.showpass = !this.showpass;
   }
 
   loginSubmit(){
-    this.accountService.login(this.formLogin.value).subscribe(next=>{
-      if(next.token != undefined){
-        this.jwtService.setToken(next.token);
-        this.jwtService.setRoles(next.roles);
-        this.jwtService.setName(next.name);
-        this.jwtService.setDate(next.createdTime);
-        this.router.navigateByUrl("/pages/components/home-main");
-      }
-    })
+    if(this.formLogin.valid){
+      this.accountService.login(this.formLogin.value).subscribe({
+        next: (response)=>{
+          if(response?.token != undefined){
+            this.jwtService.setToken(response.token);
+            this.jwtService.setRoles(response.roles);
+            this.jwtService.setName(response.name);
+            this.jwtService.setDate(response.createdTime);
+            this.router.navigateByUrl("/pages/components/home-main");
+          }
+        },
+        error: (err) => {
+          if (err.error?.message) {
+            this.errorMessage = err.error.message;
+          }
+          console.error('Login error:', err); 
+        }
+      })
+    }
+    
   }
   
   Load(){

@@ -63,6 +63,11 @@
     font-weight: bold;
 }
 
+.button-group {
+    display: flex;
+    gap: 8px;
+}
+
 .view-btn, .delete-btn {
     padding: 5px 10px;
     border: none;
@@ -71,19 +76,65 @@
 }
 
 .view-btn {
-    background-color: #4CAF50;
+    background-color: #FF8C00;
     color: white;
 }
 
 .view-btn:hover {
-    background-color: #45a049;
+    background-color: #FFA500;
 }
 
 .delete-btn {
-    background-color: #f44336;
+    background-color: #FF4500;
     color: white;
 }
 
 .delete-btn:hover {
-    background-color: #d32f2f;
+    background-color: #FF6347;
 }
+
+/* Style cho container phân trang */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #F48023; /* Màu cam chủ đạo */
+    border: 1px solid #F48023; /* Viền màu cam */
+    color: white; /* Màu chữ trắng */
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px; /* Bo góc */
+    font-size: 14px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  /* Style cho nút hover */
+  .pagination button:hover {
+    background-color: #ff8533; /* Màu cam nhạt hơn khi hover */
+    border-color: #ff8533;
+  }
+  
+  /* Style cho nút active */
+  .pagination button.active {
+    background-color: #F48023; /* Màu cam đậm khi active */
+    border-color: #F48023;
+  }
+  
+  /* Style cho nút bị vô hiệu hóa */
+  .pagination button:disabled {
+    background-color: #ffcc99; /* Màu nhạt cho nút vô hiệu hóa */
+    border-color: #ffcc99;
+    cursor: not-allowed; /* Con trỏ chuột thay đổi khi vô hiệu hóa */
+  }
+  
+  /* Style cho phần văn bản chỉ số trang */
+  .pagination span {
+    font-size: 14px;
+    color: #333; /* Màu chữ đen cho văn bản */
+    margin: 0 10px;
+  }

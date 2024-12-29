@@ -5,9 +5,9 @@ import { LoginForm } from '../models/dto/LoginForm';
 import { JwtResponse } from '../models/dto/JwtRespone';
 import { JwtService } from './jwt.service';
 import { Router } from '@angular/router';
-import { Account } from '../models/Account';
 import { AccountListDto } from '../models/dto/AccountListDto';
 import { AccountEditDto } from '../models/dto/AccountEditDto';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -27,12 +27,22 @@ export class AccountService {
     };
   }
 
-  register(account: any): Observable<any> {
-    return this.httpClient.post<any>(this.URL + "/account/register", account, this.httpOptions);
+  register(account: any): Observable<any>{
+    return this.httpClient.post<any>(`${this.URL}/account/register`, account, this.httpOptions).pipe(
+      catchError((error) => {
+        console.error('Error caught in service:', error);
+        throw error;
+      })
+    );
   }
 
-  login(formLogin: LoginForm): Observable<JwtResponse> {
-    return this.httpClient.post<JwtResponse>(this.URL + "/account/login", formLogin);
+  login(formLogin: LoginForm): Observable<JwtResponse>{
+    return this.httpClient.post<JwtResponse>(this.URL+"/account/login", formLogin).pipe(
+      catchError((error) => {
+        console.error('Error caught in service:', error);
+        throw error;
+      })
+    );
   }
 
   logout() {
@@ -62,3 +72,4 @@ export class AccountService {
     return this.httpClient.put<AccountEditDto>(this.URL + "/admin/updateSatusAccount/" + id, status)
   }
 }
+

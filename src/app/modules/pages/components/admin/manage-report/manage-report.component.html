@@ -14,12 +14,6 @@
     <div class="wrap-post">
         <h3 style="text-align: center; margin-bottom: 20px; font-weight: bold">QUẢN LÝ BÁO CÁO</h3>
 
-        <!-- Search Section -->
-        <div class="search-section">
-            <input type="text" placeholder="Tìm kiếm báo cáo..." class="search-input" />
-            <button class="search-btn">Tìm kiếm</button>
-        </div>
-
         <!-- Report Table -->
         <table class="report-table">
             <thead>
@@ -38,13 +32,20 @@
                     <td>{{item.content}}</td>
                     <td>{{item.user.firstName}} {{item.user.lastName}}</td>
                     <td>{{item.reportDate}}</td>
-                    <td>{{item.content}}</td>
+                    <td>{{ item.status ? 'Đã duyệt' : 'Chưa duyệt' }}</td>
                     <td>
-                        <button class="view-btn">Xem</button>
-                        <button class="delete-btn">Xóa</button>
+                        <div class="button-group">
+                            <button class="view-btn"><a routerLink ="/pages/components/blog-detail/{{item.blog.id}}">Xem</a></button>
+                            <button class="delete-btn" (click)="updateReport(item.id)">Duyệt</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="pagination">
+            <button [disabled]="currentPage === 0" (click)="changePage(currentPage - 1)">Trước</button>
+            <span>Page {{ currentPage + 1 }} / {{ totalPages }}</span>
+            <button [disabled]="currentPage >= totalPages - 1" (click)="changePage(currentPage + 1)">Tiếp</button>
+        </div>
     </div>
 </div>

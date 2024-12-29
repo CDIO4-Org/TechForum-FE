@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UserInfoComponent implements OnInit {
   previewUrl: string | ArrayBuffer | null = null;
   userForm: FormGroup;
+  userFormReplace: FormGroup;
+  chooseAva: boolean = false;
   userDto: UserDto = null;
   isLoading: boolean = false;
   constructor(private render: Renderer2, private userService: UserService, private formBuilder: FormBuilder, private toast: ToastrService) {
@@ -23,7 +25,7 @@ export class UserInfoComponent implements OnInit {
     script.src = 'assets/js/slide1.js';
     this.render.appendChild(document.body, script);
 
-    this.userService.getUser().subscribe(data =>{
+    this.userService.getUser().subscribe(data => {
       this.userDto = data;
       this.previewUrl = data.avaUrl;
       this.userForm = this.formBuilder.group({
@@ -39,30 +41,50 @@ export class UserInfoComponent implements OnInit {
       console.log("before: " + this.previewUrl);
       console.log("userDto: " + this.userDto);
     })
-    
+
   }
 
-
   onFileSelected(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0]; 
+    this.chooseAva = true;
+    const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         this.previewUrl = reader.result; // Cập nhật URL ảnh xem trước
-        this.userForm.patchValue({avatar: file});
+        this.userForm.patchValue({ avatar: file });
         console.log("after select: " + this.previewUrl);
       };
       reader.readAsDataURL(file); // Đọc file
     }
   }
 
-  onSubmit(){
-    this.isLoading = true;
-    this.userService.updateUser(this.userDto.id, this.userForm).subscribe(next => {
-      this.toast.success('Cập nhật thông tin cá nhân thành công');
-      this.ngOnInit();
-      this.isLoading = false;
 
-    })
+
+  onSubmit() {
+    this.isLoading = true;
+    if (this.chooseAva == false) {
+      this.userFormReplace = this.formBuilder.group({
+        firstName: [this.userForm.value.firstName],
+        lastName: [this.userForm.value.lastName],
+        email: [this.userForm.value.email],
+        gender: [this.userForm.value.gender],
+        phoneNumber: [this.userForm.value.phoneNumber],
+        birthDate: [this.userForm.value.birthDate],
+        address: [this.userForm.value.address]
+      });
+      this.userService.updateUser(this.userDto.id, this.userFormReplace).subscribe(next => {
+        this.toast.success('Cập nhật thông tin cá nhân thành công');
+        this.ngOnInit();
+        this.isLoading = false;
+
+      })
+    } else {
+      this.userService.updateUser(this.userDto.id, this.userForm).subscribe(next => {
+        this.toast.success('Cập nhật thông tin cá nhân thành công');
+        this.ngOnInit();
+        this.isLoading = false;
+
+      })
+    }
   }
 }
